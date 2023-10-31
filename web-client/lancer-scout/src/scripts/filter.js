@@ -1,3 +1,5 @@
+import React from "react"
+
 // entry is the json for an entire form
 // query is an object composed of keyName, operator, operand
 const applyQuery = (entry, query) => {
@@ -6,6 +8,9 @@ const applyQuery = (entry, query) => {
     if(!entry.hasOwnProperty(keyName)) return false
 
     const entryValue = entry[keyName]
+
+    if (operator == "is true") return typeof entryValue == "boolean" && entryValue
+    if (operator == "is false") return !(typeof entryValue == "boolean" && entryValue)
     
     if (operator == "equals") return entryValue === operand
     if (operator == "not equals") return entryValue !== operand
@@ -73,8 +78,8 @@ const getKeyMonotype = (entries, keyName) => {
 
 const getValidOperators = (type) => {
     if(type == "boolean") return [
-        "equals",
-        "not equals"
+        "is true",
+        "is false"
     ]
 
     if(type == "string") return [
@@ -91,6 +96,8 @@ const getValidOperators = (type) => {
         "greater than",
         "greater than or equals",
     ]
+
+    return []
 }
 
 // generate the averages for each key within all the entries
@@ -118,7 +125,7 @@ const mergeEntries = (entries) => {
                 </ul>
             )
         } else if(monotype == "boolean"){
-            const trueCount = values.filter(value => value)
+            const trueCount = values.filter(value => value).length
 
             // 3 sig fig
             const truePercent = Math.round(1000 * trueCount / values.length) / 10
@@ -126,8 +133,8 @@ const mergeEntries = (entries) => {
             
             merged[key] = (
                 <ul>
-                    <li>True ({truePercent}%)</li>
-                    <li>False ({falsePercent}%)</li>
+                    <li>({truePercent}%) True</li>
+                    <li>({falsePercent}%) False</li>
                 </ul>
             )
         } else if(monotype == "number"){
@@ -137,7 +144,11 @@ const mergeEntries = (entries) => {
 
             const average = Math.round(100 * total / values.length) / 100
 
-            merged[key] = "Average: " + average
+            merged[key] = (
+                <ul>
+                    <li>{ "Average: " + average }</li>
+                </ul>
+            )
         } else if(monotype == "string"){
             const valueMap = {}
 
@@ -169,12 +180,14 @@ const mergeEntries = (entries) => {
             merged[key] = "Whoops, error merging data for this form"
         }
     })
+
+    return merged
 }
 
 export {
-    applyQuery,
     query,
     getAllKeys,
     getKeyMonotype,
-    getValidOperators
+    getValidOperators,
+    mergeEntries
 }

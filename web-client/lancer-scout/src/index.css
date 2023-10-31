@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.nav {
+    width: 100%;
+    padding: 20px;
+    background-color: rgb(220, 220, 220);
+}
+
+.nav a {
+    display: inline;
+    margin: 10px;
+}
+
+.query {
+    display: inline-flex;
+    align-items: center;
+    width: 160px;
+    margin: 10px;
+    margin-left: 0;
+    margin-bottom: 0;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(220, 220, 220);
+}
+
+.query-options {
+    display: inline-block;
+    width: 120px;
+}
+
+.query-options select {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: none;
+}
+
+.query-options input {
+    width: calc(100% - 8px);
+    padding: 4px;
+    border: none;
+}
+
+.query-delete {
+    width: 40px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.add {
+    display: inline;
+    margin: 10px;
+    margin-left: 0;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(220, 220, 220);
+    user-select: none;
+}
+
+.form {
+    text-align: left;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    width: 300px;
+    max-height: 200px;
+    overflow-y: scroll;
+    background-color: rgb(220, 220, 220);
+}
+
+.forms {
+    max-width: 1050px;
+    margin: auto;
+    vertical-align: top;
+    text-wrap: wrap;
+    white-space: wrap;
+    overflow: scroll;
+}

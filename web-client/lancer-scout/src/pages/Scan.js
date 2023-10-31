@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useEffect } from "react"
 
 import Webcam from "react-webcam"
 import jsqr from "jsqr"
 import { generateDataFromBuffer } from "../scripts/dataBuffer"
 
+// todo: shouldn't be hard coded
 const testForm = [
     {
         "title": "General",
@@ -274,44 +275,75 @@ const form = testForm.filter(e => e.ui.type != "header")
 
 const ScanPage = () => {
     const webcamRef = useRef()
-    const canvasRef = useRef()
 
-    return (
-        <div>
-            <div>Hello React Web Client</div>
-            <Webcam ref={webcamRef} onClick={() => {
-                const snapshot = webcamRef.current.getScreenshot()
+    useEffect(() => {
+        const scan = (e) => {
+            if (e.code != "Space") return
 
-                const tempImg = new Image()
-                tempImg.src = snapshot
-                tempImg.onload = () => {
-                    const ctx = canvasRef.current.getContext("2d")
+            const snapshot = webcamRef.current.getScreenshot()
+
+            const tempImg = new Image()
+            tempImg.src = snapshot
+            tempImg.onload = () => {
+                const canvas = document.createElement("canvas")
+                canvas.width = 640
+                canvas.height = 480
+
+                const ctx = canvas.getContext("2d")
+                
+                ctx.drawImage(tempImg, 0, 0, 640, 480)
+                const imageData = ctx.getImageData(0, 0, 640, 480)
+
+                const output = jsqr(imageData.data, 640, 480)
+
+                if(output == null){
+                    alert("Failed to scan qr code. Make sure the image is not blurry and contains a valid qr code.")
+                } else {
+                    const buffer = []
+
+                    for (let i = 0;i<output.data.length;i++) buffer.push(output.data.charCodeAt(i))
+
+                    const data = generateDataFromBuffer(buffer, form)
+
+                    const receipt = {
+                        id: data.id,
+                        entries: Object.fromEntries(form.map((entry, index) => [ entry.title, data.entries[index] ]))
+                    }
                     
-                    ctx.drawImage(tempImg, 0, 0, 640, 480)
-                    const imageData = ctx.getImageData(0, 0, 640, 480)
+                    const allPersistentKeys = Object.keys(localStorage)
 
-                    const output = jsqr(imageData.data, 640, 480)
+                    if(allPersistentKeys.includes("lancer-scout-data")){
+                        try {
+                            const json = JSON.parse(localStorage.getItem("lancer-scout-data"))
 
-                    if(output == null){
-                        console.log("youre a bum")
-                    } else {
-                        const buffer = []
+                            json.push(receipt)
 
-                        for (let i = 0;i<output.data.length;i++) buffer.push(output.data.charCodeAt(i))
+                            localStorage.setItem(JSON.stringify(json))
 
-                        const data = generateDataFromBuffer(buffer, form)
-
-                        const receipt = {
-                            id: data.id,
-                            map: Object.fromEntries(form.map((entry, index) => [ entry.title, data.entries[index] ]))
+                            alert("Successfully scanned qr code and added to database.")
+                        } catch(e) {
+                            alert("An issue occurred adding to database. Please contact a programmer to validate the json in local storage.")
                         }
-                        
-                        console.log(receipt)
+                    } else {
+                        localStorage.setItem("lancer-scout-data", JSON.stringify([ receipt ]))
                     }
                 }
-            }} />
-            <canvas ref={canvasRef} width={640} height={480} />
-        </div>
+            }
+        }
+
+        window.addEventListener("keydown", scan)
+
+        return () => window.removeEventListener("keydown", scan)
+    }, [])
+
+    return (
+        <React.Fragment>
+            <h1>Scan</h1>
+            <div style={{ textAlign: "center" }}>
+                <Webcam ref={webcamRef} />
+                <h2>Press space to scan</h2>
+            </div>
+        </React.Fragment>
     )
 }
 
