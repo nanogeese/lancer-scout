@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-import { View, Text, TextInput, StyleSheet, Alert } from "react-native"
+import { View, TextInput, StyleSheet, Alert, TouchableWithoutFeedback, Keyboard } from "react-native"
 
 import Button from "../components/Button"
 
@@ -31,18 +31,28 @@ const UploadSchemaStack = ({ route, navigation }) => {
     }
 
     return (
-        <View>
-            <Text>
-                Paste Schema JSON Below
-            </Text>
-            <TextInput style={{ backgroundColor: colors.grey }} value={inputSchema} onChangeText={setInputSchema} />
-            <Button handlePress={uploadSchema}>Upload</Button>
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.wrapper}>
+                <TextInput style={styles.input} value={inputSchema} onChangeText={setInputSchema} multiline />
+                <Button handlePress={uploadSchema}>Upload</Button>
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 
 const styles = StyleSheet.create({
-
+    wrapper: {
+        width: "100%",
+        flex: 1,
+        backgroundColor: colors.white
+    },
+    input: {
+        margin: 10,
+        padding: 10,
+        maxHeight: 200,
+        borderRadius: 10,
+        backgroundColor: colors.grey
+    }
 })
 
 export default UploadSchemaStack
