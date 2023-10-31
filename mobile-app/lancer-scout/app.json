@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mattperls-code.lancer-scout-v2"
     },
     "android": {
       "adaptiveIcon": {

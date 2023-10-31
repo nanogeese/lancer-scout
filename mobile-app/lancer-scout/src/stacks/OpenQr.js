@@ -12,8 +12,6 @@ import { colors } from "../constants"
 const OpenQrStack = ({ route, navigation }) => {
     const { id, data, mode } = route.params
 
-    console.log({ data })
-
     const [deleted, setDeleted] = useState(false)
     const handleDelete = () => {
         if (deleted) return

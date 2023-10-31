@@ -75,8 +75,6 @@ const DataEntryStack = ({ route, navigation }) => {
             if (question.ui.type != "header") inputs.push(typeof inputState[index] == "number" ? Math.round(inputState[index]) : inputState[index])
         })
 
-        console.log({ inputs })
-
         const buffer = generateBufferFromData({
             form: form.filter(question => question.ui.type != "header"),
             id,

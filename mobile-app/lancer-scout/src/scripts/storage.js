@@ -51,7 +51,7 @@ const addEntry = async (entry, mode) => {
 }
 
 const removeEntry = async (id, mode) => {
-    const entries = await getEntries()
+    const entries = await getEntries(mode)
 
     const updated = entries.filter(e => e.id != id)
 
