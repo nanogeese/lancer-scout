@@ -1,0 +1,16 @@
+{
+  "background_color": "rgb(245, 245, 245)",
+  "display": "standalone",
+  "lang": "en",
+  "name": "lancer-scout",
+  "short_name": "lancer-scout",
+  "start_url": "/?utm_source=web_app_manifest",
+  "orientation": "portrait",
+  "related_applications": [
+    {
+      "platform": "itunes",
+      "id": "com.mattperls-code.lancer-scout-v2"
+    }
+  ],
+  "prefer_related_applications": true
+}
