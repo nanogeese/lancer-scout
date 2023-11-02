@@ -1,5 +1,5 @@
 // The name of my cache
-const cacheName = "my-pwa-shell-v1.02";
+const cacheName = "my-pwa-shell-v1.03";
 //The files I'm going to cache
 const filesToCache = [
   "/",
@@ -29,7 +29,7 @@ self.addEventListener('fetch', function (event) {
   if (!navigator.onLine) {
 
     event.respondWith(
-      caches.match(event.request, { ignoreSearch: true })
+      caches.match(event.request, { ignoreSearch: true, ignoreMethod: true, ignoreVary: true })
         .then(function (response) {
           if (response) return response;
         }))}})
