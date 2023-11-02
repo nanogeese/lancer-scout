@@ -18,17 +18,19 @@ const OpenQrStack = ({ route, navigation }) => {
 
         setDeleted(true)
 
-        Alert.alert("Are You Sure?", "If you delete this qr code all of the scouting information for this entry will be lost.", [
-            {
-                text: "Cancel",
-                style: "cancel",
-                onPress: () => setDeleted(false)
-            },
-            {
-                text: "Yes",
-                onPress: () => removeEntry(id, mode).then(navigation.goBack)
-            }
-        ])
+        confirm("Are You Sure?\n\nIf you delete this qr code all of the scouting information for this entry will be lost.") ? removeEntry(id, mode).then(navigation.goBack) : setDeleted(false)
+
+        // Alert.alert("Are You Sure?", "If you delete this qr code all of the scouting information for this entry will be lost.", [
+        //     {
+        //         text: "Cancel",
+        //         style: "cancel",
+        //         onPress: () => setDeleted(false)
+        //     },
+        //     {
+        //         text: "Yes",
+        //         onPress: () => removeEntry(id, mode).then(navigation.goBack)
+        //     }
+        // ])
     }
 
     return (
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white
     },
     label: {
-        // fontFamily: "",
+        fontFamily: "Open Sans",
         fontSize: 24,
         color: colors.black,
         marginBottom: 20

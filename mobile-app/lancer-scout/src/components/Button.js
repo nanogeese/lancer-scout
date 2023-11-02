@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         borderColor: colors.crimson
     },
     text: {
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "500",
         fontSize: 18,
         color: colors.black

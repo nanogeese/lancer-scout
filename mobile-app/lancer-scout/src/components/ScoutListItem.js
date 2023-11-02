@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     date: {
-        // fontFamily: "",
+        fontFamily: "Open Sans",
         fontSize: 18,
         color: colors.black
     }

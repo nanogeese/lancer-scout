@@ -1,10 +1,14 @@
-import { initialWindowMetrics } from "react-native-safe-area-context"
+// import { initialWindowMetrics } from "react-native-safe-area-context"
 
 const screen = {
-    width: initialWindowMetrics.frame.width - initialWindowMetrics.insets.left - initialWindowMetrics.insets.right,
-    height: initialWindowMetrics.frame.height - initialWindowMetrics.insets.top - initialWindowMetrics.insets.bottom,
-    top: initialWindowMetrics.insets.top,
-    bottom: initialWindowMetrics.insets.bottom
+    width: window.innerWidth,
+    height: window.innerHeight,
+    top: 0,
+    bottom: 0
+    // width: initialWindowMetrics.frame.width - initialWindowMetrics.insets.left - initialWindowMetrics.insets.right,
+    // height: initialWindowMetrics.frame.height - initialWindowMetrics.insets.top - initialWindowMetrics.insets.bottom,
+    // top: initialWindowMetrics.insets.top,
+    // bottom: initialWindowMetrics.insets.bottom
 }
 
 const colors = {

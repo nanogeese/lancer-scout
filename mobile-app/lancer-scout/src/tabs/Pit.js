@@ -31,7 +31,7 @@ const PitTab = () => {
                     shadowOpacity: 0
                 },
                 headerTitleStyle: {
-                    // fontFamily: "Open Sans",
+                    fontFamily: "Open Sans",
                     fontWeight: "700",
                     fontSize: 24,
                     color: colors.black
@@ -41,16 +41,17 @@ const PitTab = () => {
                     return (
                         <TouchableWithoutFeedback onPress={() => {
                             // ReactNativeHapticFeedback.trigger("impactMedium", { enableVibrateFallback: false })
-                            Alert.alert("Are You Sure?", "If you exit the page all of the scouting information for this entry will be lost.", [
-                                {
-                                    text: "Cancel",
-                                    style: "cancel"
-                                },
-                                {
-                                    text: "Yes",
-                                    onPress
-                                }
-                            ])
+                            if (confirm("Are You Sure?\n\nIf you exit the page all of the scouting information for this entry will be lost.")) onPress()
+                            // Alert.alert("Are You Sure?", "If you exit the page all of the scouting information for this entry will be lost.", [
+                            //     {
+                            //         text: "Cancel",
+                            //         style: "cancel"
+                            //     },
+                            //     {
+                            //         text: "Yes",
+                            //         onPress
+                            //     }
+                            // ])
                         }}>
                             <View style={{ flex: 1, width: 80, alignItems: "center", justifyContent: "center" }}>
                                 <FontAwesomeIcon icon={faChevronLeft} size={24} color={colors.crimson} />
@@ -68,7 +69,7 @@ const PitTab = () => {
                     shadowOpacity: 0
                 },
                 headerTitleStyle: {
-                    // fontFamily: "Open Sans",
+                    fontFamily: "Open Sans",
                     fontWeight: "700",
                     fontSize: 24,
                     color: colors.black

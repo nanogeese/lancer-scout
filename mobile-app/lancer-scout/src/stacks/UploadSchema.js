@@ -24,19 +24,20 @@ const UploadSchemaStack = ({ route, navigation }) => {
         if(status.success){
             navigation.goBack()
         } else {
-            Alert.alert("Failed To Upload Schema", status.reason)
+            alert("Failed To Upload Schema\n\n" + status.reason)
+            // Alert.alert("Failed To Upload Schema", status.reason)
 
             setUploaded(false)
         }
     }
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.wrapper}>
                 <TextInput style={styles.input} value={inputSchema} onChangeText={setInputSchema} multiline />
                 <Button handlePress={uploadSchema}>Upload</Button>
             </View>
-        </TouchableWithoutFeedback>
+        // </TouchableWithoutFeedback>
     )
 }
 

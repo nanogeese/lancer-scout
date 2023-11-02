@@ -12,6 +12,7 @@ import { screen, colors } from "../constants"
 const FormHeader = ({ title, setValue }) => {
     return (
         <View style={styles.headerContainer} onLayout={(e) => {
+            console.log(e.nativeEvent.layout.y)
             setValue(e.nativeEvent.layout.y)
         }}>
             <Text style={styles.headerText} numberOfLines={1}>
@@ -392,7 +393,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         paddingHorizontal: 20,
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "700",
         fontSize: 24,
         color: colors.crimson,
@@ -407,7 +408,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white
     },
     inputTitle: {
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "400",
         color: colors.black,
         fontSize: 20,
@@ -421,7 +422,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     inputText: {
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "500",
         fontStyle: "italic",
         fontSize: 16,
@@ -442,7 +443,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     sliderLabel: {
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "700",
         fontSize: 16,
         color: colors.black,
@@ -484,7 +485,7 @@ const styles = StyleSheet.create({
         borderWidth: 2.5
     },
     toggleButtonText: {
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "700",
         fontSize: 20,
         color: colors.black
@@ -499,7 +500,7 @@ const styles = StyleSheet.create({
     },
     radioOptionButtonText: {
         paddingHorizontal: 20,
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "700",
         fontSize: 18,
         color: colors.black
@@ -511,7 +512,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     dropdownOptionText: {
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "700",
         fontSize: 16,
         color: colors.black

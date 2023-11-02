@@ -69,14 +69,14 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.crimson
     },
     headerText: {
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "700",
         fontSize: 24,
         color: colors.black
     },
     emptyList: {
         marginTop: 20,
-        // fontFamily: "",
+        fontFamily: "Open Sans",
         fontSize: 24,
         color: colors.crimson,
         textAlign: "center"

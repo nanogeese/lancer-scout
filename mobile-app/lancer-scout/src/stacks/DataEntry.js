@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react"
+import React, { useRef, useState, useEffect, useCallback } from "react"
 
 import { TouchableWithoutFeedback, ScrollView, View, Text, StyleSheet } from "react-native"
 
@@ -57,9 +57,11 @@ const DataEntryStack = ({ route, navigation }) => {
     }, [])
 
     const setInput = (index, value) => {
-        const temp = [...inputState]
-        temp[index] = value
-        setInputState(temp)
+        setInputState((iS) => {
+            const temp = [...iS]
+            temp[index] = value
+            return temp
+        })
     }
 
     const [saved, setSaved] = useState(false)
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
         borderColor: colors.crimson
     },
     linkText: {
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "500",
         fontSize: 18,
         color: colors.black
@@ -179,7 +181,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white
     },
     buttonText: {
-        // fontFamily: "Open Sans",
+        fontFamily: "Open Sans",
         fontWeight: "700",
         fontSize: 20,
         color: colors.crimson
