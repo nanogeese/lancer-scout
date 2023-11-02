@@ -1,5 +1,5 @@
 // The name of my cache
-const cacheName = "my-pwa-shell-v1.0";
+const cacheName = "my-pwa-shell-v1.01";
 //The files I'm going to cache
 const filesToCache = [
   "/",
