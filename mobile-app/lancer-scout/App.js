@@ -15,6 +15,8 @@ import PitTab from "./src/tabs/Pit"
 
 import { colors } from "./src/constants"
 
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js")
+
 const App = () => {
     const [fontsLoaded] = useFonts({ "Open Sans": require("./assets/fonts/OpenSans.ttf") })
     
