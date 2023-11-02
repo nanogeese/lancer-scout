@@ -15,13 +15,6 @@ import PitTab from "./src/tabs/Pit"
 
 import { colors } from "./src/constants"
 
-if ("serviceWorker" in navigator) {
-    console.log("yay service worker")
-    navigator.serviceWorker.register("./sw.js")
-} else {
-    console.log("whoops")
-}
-
 const App = () => {
     const [fontsLoaded] = useFonts({ "Open Sans": require("./assets/fonts/OpenSans.ttf") })
     
