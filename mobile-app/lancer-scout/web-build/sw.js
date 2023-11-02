@@ -1,6 +1,6 @@
 const cacheName = "lancer-scout-v2-v1"
 const appShellFiles = [
-    "./web-build/"
+    "/"
 ]
 
 self.addEventListener("install", (e) => {
