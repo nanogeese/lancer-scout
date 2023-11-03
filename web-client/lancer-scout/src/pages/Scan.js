@@ -30,7 +30,49 @@ const testForm = [
         "title": "Team",
         "ui": {
             "type": "dropdown",
-            "options": ["321 RoboLancers", "427 Lance-A-Bot", "433 Firebirds"]
+            "options": [
+                "No Team Selected",
+                "103 Cybersonics",
+                "272 Cyber Crusaders",
+                "316 LUNATECS",
+                "321 RoboLancers",
+                "341 Miss Daisy",
+                "365 MOE/Miracle Workerz",
+                "427 LANCE-A-LOT",
+                "433 Firebirds",
+                "484 Roboforce",
+                "533 The PSIcotics",
+                "708 Hatters Robotics",
+                "834 The Spartechs",
+                "1218 SCH Robotics",
+                "1391 Metal Moose",
+                "1403 Cougar Robotics",
+                "1640 Sab-BOT-age",
+                "1676 The Pascack Pi-oneers",
+                "1712 Dawgma",
+                "2539 Krypton Cougars",
+                "2607 The Fighting RoboVikings",
+                "3314 Mechanical Mustangs",
+                "4027 Centre Punch",
+                "4467 Titanium Titans",
+                "4575 Gemini",
+                "5181 Explorer Robotics",
+                "5401 Fightin Robotic Owls",
+                "5407 Wolfpack Robotics",
+                "5740 The Trojanators",
+                "6808 William Tennent Robotics",
+                "7414 RetroRobotics",
+                "8085 Mojo",
+                "8714 Robo Griffins",
+                "9094 The Earthquakers",
+                "9991 Freshman Robotic Owls",
+                "293 SPIKE",
+                "555 Montclair Robotics",
+                "1111 Powerhawks",
+                "8117 Easton RoboRovers",
+                "9015 Questionable Engineering",
+                "423 Simple Machines"
+            ]
         },
         "dataType": "6bit"
     },
@@ -38,7 +80,10 @@ const testForm = [
         "title": "Alliance",
         "ui": {
             "type": "radio",
-            "options": ["Red", "Blue"]
+            "options": [
+                "Red",
+                "Blue"
+            ]
         },
         "dataType": "1bit"
     },
@@ -52,7 +97,11 @@ const testForm = [
         "title": "Lane",
         "ui": {
             "type": "radio",
-            "options": ["Bump", "No Bump", "Charging Station"]
+            "options": [
+                "Bump",
+                "No Bump",
+                "Charging Station"
+            ]
         },
         "dataType": "2bit"
     },
@@ -109,7 +158,11 @@ const testForm = [
         "title": "Auto Balance",
         "ui": {
             "type": "radio",
-            "options": ["Not Applicable", "Engaged", "Docked"]
+            "options": [
+                "Not Applicable",
+                "Engaged",
+                "Docked"
+            ]
         },
         "dataType": "2bit"
     },
@@ -171,7 +224,12 @@ const testForm = [
         "title": "Time Left When Starting Balance",
         "ui": {
             "type": "radio",
-            "options": ["0-10 Seconds", "10-20 Seconds", "20-30 Seconds", "30+ Seconds"]
+            "options": [
+                "0-10 Seconds",
+                "10-20 Seconds",
+                "20-30 Seconds",
+                "30+ Seconds"
+            ]
         },
         "dataType": "2bit"
     },
@@ -179,7 +237,12 @@ const testForm = [
         "title": "Time Taken To Balance",
         "ui": {
             "type": "radio",
-            "options": ["0-5 Seconds", "5-10 Seconds", "10-15 Seconds", "15+ Seconds"]
+            "options": [
+                "0-5 Seconds",
+                "5-10 Seconds",
+                "10-15 Seconds",
+                "15+ Seconds"
+            ]
         },
         "dataType": "2bit"
     },
@@ -187,7 +250,11 @@ const testForm = [
         "title": "Teleop Balance",
         "ui": {
             "type": "radio",
-            "options": ["Not Applicable", "Engaged", "Docked"]
+            "options": [
+                "Not Applicable",
+                "Engaged",
+                "Docked"
+            ]
         },
         "dataType": "2bit"
     },
@@ -195,7 +262,12 @@ const testForm = [
         "title": "Teleop Balance Partners",
         "ui": {
             "type": "radio",
-            "options": ["Not Applicable", "Alone", "1 Partner", "2 Partners"]
+            "options": [
+                "Not Applicable",
+                "Alone",
+                "1 Partner",
+                "2 Partners"
+            ]
         },
         "dataType": "2bit"
     },
@@ -251,7 +323,11 @@ const testForm = [
         "title": "Cycle Speed",
         "ui": {
             "type": "radio",
-            "options": ["Slow", "Medium", "Fast"]
+            "options": [
+                "Slow",
+                "Medium",
+                "Fast"
+            ]
         },
         "dataType": "2bit"
     },
