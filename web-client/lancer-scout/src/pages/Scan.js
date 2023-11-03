@@ -307,8 +307,14 @@ const ScanPage = () => {
 
                     const receipt = {
                         id: data.id,
-                        entries: Object.fromEntries(form.map((entry, index) => [ entry.title, data.entries[index] ]))
+                        entries: Object.fromEntries(form.map((entry, index) => {
+                            const value =  entry.ui.hasOwnProperty("options") ? entry.ui.options[data.entries[index]] : data.entries[index]
+                            
+                            return [ entry.title, value ]
+                        }))
                     }
+
+                    console.log({ receipt })
                     
                     const allPersistentKeys = Object.keys(localStorage)
 
@@ -316,16 +322,22 @@ const ScanPage = () => {
                         try {
                             const json = JSON.parse(localStorage.getItem("lancer-scout-data"))
 
-                            json.push(receipt)
+                            if(json.some(e => e.id == receipt.id)){
+                                alert("Found duplicate copy of the scanned code in the database. If this is a mistake, please contact a programmer to validate the qr code receipt in console and json in local storage.")
+                            } else {
+                                json.push(receipt)
 
-                            localStorage.setItem(JSON.stringify(json))
+                                localStorage.setItem("lancer-scout-data", JSON.stringify(json))
 
-                            alert("Successfully scanned qr code and added to database.")
+                                alert("Successfully scanned qr code and added to database.")
+                            }
                         } catch(e) {
                             alert("An issue occurred adding to database. Please contact a programmer to validate the json in local storage.")
                         }
                     } else {
                         localStorage.setItem("lancer-scout-data", JSON.stringify([ receipt ]))
+
+                        alert("Successfully scanned qr code and added to database.")
                     }
                 }
             }

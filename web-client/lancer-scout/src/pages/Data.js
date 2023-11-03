@@ -8,7 +8,7 @@ const DataPage = () => {
 
         if(persistentKeys.includes("lancer-scout-data")){
             try {
-                const json = JSON.parse(localStorage.getItem("lancer-scout-data"))
+                const json = JSON.parse(localStorage.getItem("lancer-scout-data")).map(e => e.entries)
 
                 return json
             } catch(e){
@@ -44,6 +44,8 @@ const DataPage = () => {
 
     const filteredForms = query(data, queries)
     const mergedForm = mergeEntries(filteredForms)
+
+    console.log({ filteredForms, mergedForm })
 
     const allKeys = getAllKeys(data)
 
@@ -120,7 +122,7 @@ const DataPage = () => {
                             <br />
                             <i>
                                 {
-                                    entry[1]
+                                    typeof entry[1] == "boolean" ? (entry[1] ? "True" : "False") : entry[1]
                                 }
                             </i>
                         </div>
@@ -152,7 +154,7 @@ const DataPage = () => {
             </div>
             <hr />
             <div style={{ textAlign: "center" }}>
-                <h2>Results Overview</h2>
+                <h2>Results Overview ({filteredForms.length} Matches)</h2>
                 <Form entries={mergedForm} />
             </div>
             <hr />
