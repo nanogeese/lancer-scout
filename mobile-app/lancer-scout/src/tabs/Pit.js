@@ -14,7 +14,7 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons"
 
 import { screen, colors } from "../constants"
 
-const PitTab = () => {
+const MatchTab = () => {
     const Stack = createStackNavigator()
     
     return (
@@ -88,10 +88,34 @@ const PitTab = () => {
                 }
             }} />
             <Stack.Screen name={"OpenQr"} component={OpenQr} options={{
-                presentation: "modal"
+                headerShown: true,
+                headerTitle: "QR Upload",
+                headerStyle: {
+                    height: screen.top + 70,
+                    backgroundColor: colors.white,
+                    shadowOpacity: 0
+                },
+                headerTitleStyle: {
+                    fontFamily: "Open Sans",
+                    fontWeight: "700",
+                    fontSize: 24,
+                    color: colors.black
+                },
+                headerLeft: ({ onPress }) => {
+                    return (
+                        <TouchableWithoutFeedback onPress={() => {
+                            // ReactNativeHapticFeedback.trigger("impactMedium", { enableVibrateFallback: false })
+                            onPress()
+                        }}>
+                            <View style={{ flex: 1, width: 80, alignItems: "center", justifyContent: "center" }}>
+                                <FontAwesomeIcon icon={faChevronLeft} size={24} color={colors.crimson} />
+                            </View>
+                        </TouchableWithoutFeedback>
+                    )
+                }
             }} />
         </Stack.Navigator>
     )
 }
 
-export default PitTab
+export default MatchTab

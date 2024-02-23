@@ -18,8 +18,6 @@ const DataEntryStack = ({ route, navigation }) => {
     const rawKeyboardHeight = 80 // hardcoded since dynamic one causes internal memory leak
     const keyboardHeight = Math.max(0, rawKeyboardHeight - (70 + screen.bottom))
 
-    const [scrollable, setScrollable] = useState(true)
-
     useEffect(() => {
         const defaultInputs = []
 
@@ -116,7 +114,7 @@ const DataEntryStack = ({ route, navigation }) => {
     const inputRenders = []
     inputState.forEach((item, index) => {
         inputRenders.push(
-            <Input key={index} value={item} setValue={value => setInput(index, value)} {...form[index]} setScrollable={setScrollable} />
+            <Input key={index} value={item} setValue={value => setInput(index, value)} {...form[index]} />
         )
     })
 
@@ -127,7 +125,7 @@ const DataEntryStack = ({ route, navigation }) => {
                     <View><ScrollView style={styles.linksContainer} contentContainerStyle={{ paddingRight: 10 }} horizontal showsHorizontalScrollIndicator={false} children={linkRenders} /></View>
                 ) : <View style={{ height: 1, backgroundColor: colors.crimson }} />
             }
-            <ScrollView ref={ref} style={styles.inputsContainer} showsVerticalScrollIndicator={false} scrollEnabled={scrollable}>
+            <ScrollView ref={ref} style={styles.inputsContainer} scrollEnabled showsVerticalScrollIndicator={false}>
                 {
                     inputRenders
                 }
