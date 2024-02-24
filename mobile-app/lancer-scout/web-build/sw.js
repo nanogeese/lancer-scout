@@ -9,11 +9,11 @@ const filesToCache = [
   "./static/media/OpenSans.071a1becc7f00e33cc5b.ttf",
   "./favicon-16.png",
   "./favicon-32.png",
-  "./static/js/193.938a1c43.js",
-  "./static/js/193.938a1c43.js.LICENSE.txt",
-  "./static/js/193.938a1c43.js.map",
-  "./static/js/main.4a16ad48.js",
-  "./static/js/main.4a16ad48.js.map"
+  "./static/js/205.302f0300.js",
+  "./static/js/205.302f0300.js.LICENSE.txt",
+  "./static/js/205.302f0300.js.map",
+  "./static/js/main.cf9ba852.js",
+  "./static/js/main.cf9ba852.js.map"
 ];
 
 self.addEventListener("install", e => {

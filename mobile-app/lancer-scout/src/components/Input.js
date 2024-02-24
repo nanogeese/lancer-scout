@@ -110,30 +110,32 @@ const FormTimerInput = ({ title, value, setValue, dataType }) => {
     const [running, setRunning] = useState(false)
 
     const [startTimestep, setStartTimestep] = useState(0)
-    const [endTimestep, setEndTimestep] = useState(0)
 
-    const timeElapsed = running ? endTimestep - startTimestep : value
+    console.log({value})
 
     useEffect(() => {
         if(running){
-            const interval = setInterval(() => setEndTimestep(Date.now()), 500)
+            const interval = setInterval(() => {
+                setValue(clampInputValue(Math.round((Date.now() - startTimestep) / 1000)))
+            }, 500)
+
+            console.log("set v to " + clampInputValue(Math.round((Date.now() - startTimestep) / 1000)))
 
             return () => clearInterval(interval)
         }
-    }, [running])
+    }, [running, startTimestep])
 
     const restart = () => {
         // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
         setValue(0)
         setStartTimestep(Date.now())
-        setEndTimestep(Date.now())
     }
 
     const start = () => {
         // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
         setRunning(true)
-        setStartTimestep(Date.now() - timeElapsed)
-        setEndTimestep(Date.now())
+        setValue(0)
+        setStartTimestep(Date.now())
     }
 
     const maxValue = Math.pow(2, parseInt(dataType.split("bit")[0])) - 1
@@ -146,7 +148,6 @@ const FormTimerInput = ({ title, value, setValue, dataType }) => {
     const stop = () => {
         // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
         setRunning(false)
-        setValue(clampInputValue(Math.round(1000 * timeElapsed)))
     }
 
     return (
@@ -160,7 +161,7 @@ const FormTimerInput = ({ title, value, setValue, dataType }) => {
                 <View style={styles.inputTextContainer}>
                     <Text style={styles.inputText}>
                         {
-                            format(timeElapsed, { leading: true })
+                            format(value * 1000, { leading: true })
                         }
                     </Text>
                 </View>
