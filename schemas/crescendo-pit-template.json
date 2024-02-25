@@ -1,0 +1,132 @@
+[
+    {
+        "title": "Scout Name",
+        "ui": {
+            "type": "text",
+            "maxLength": "20"
+        },
+        "dataType": "string"
+    },
+    {
+        "title": "Team Name",
+        "ui": {
+            "type": "dropdown",
+            "options": [
+                "321 Robolancers",
+                "427 Lance-A-Lot",
+                "433 Firebirds",
+                "341 Miss Daisy"
+            ]
+        },
+        "dataType": "6bit"
+    },
+    {
+        "title": "Drivetrain Style",
+        "ui": {
+            "type": "radio",
+            "options": [
+                "Differential / Tank",
+                "Swerve",
+                "Mecanum"
+            ]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "title": "Intake Style",
+        "ui": {
+            "type": "radio",
+            "options": [
+                "Over The Bumper",
+                "Under The Bumper",
+                "Other"
+            ]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "title": "Intake Positions",
+        "ui": {
+            "type": "radio",
+            "options": [
+                "N/A",
+                "Ground Only",
+                "Source Only",
+                "Ground And Source"
+            ]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "title": "Has Note Handoff",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "title": "Can Score Amp",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "title": "Speaker Scoring Positions",
+        "ui": {
+            "type": "dropdown",
+            "options": [
+                "None",
+                "Center Only",
+                "Sides Only",
+                "Center and Sides",
+                "Anywhere",
+                "Other"
+            ]
+        },
+        "dataType": "4bit"
+    },
+    {
+        "title": "Can Hang",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "title": "Can Score Trap",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "title": "Has Auto For DS Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "title": "Has Auto For Center Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "title": "Has Auto For Source Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "title": "Comments",
+        "ui": {
+            "type": "text",
+            "maxLength": "150"
+        },
+        "dataType": "string"
+    }
+]
