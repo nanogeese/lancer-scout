@@ -89,7 +89,7 @@ const MatchTab = () => {
             }} />
             <Stack.Screen name={"OpenQr"} component={OpenQr} options={{
                 headerShown: true,
-                headerTitle: "QR Upload",
+                headerTitle: "Scan QR Code",
                 headerStyle: {
                     height: screen.top + 70,
                     backgroundColor: colors.white,

@@ -1,5 +1,5 @@
 // The name of my cache
-const cacheName = "lancer-scout-pwa-v1.01";
+const cacheName = "lancer-scout-pwa-v1.02";
 //The files I'm going to cache
 const filesToCache = [
   "/",
@@ -12,8 +12,8 @@ const filesToCache = [
   "./static/js/205.302f0300.js",
   "./static/js/205.302f0300.js.LICENSE.txt",
   "./static/js/205.302f0300.js.map",
-  "./static/js/main.cf9ba852.js",
-  "./static/js/main.cf9ba852.js.map"
+  "./static/js/main.f8d79430.js",
+  "./static/js/main.f8d79430.js.map"
 ];
 
 self.addEventListener("install", e => {
