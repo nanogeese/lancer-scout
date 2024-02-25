@@ -4,7 +4,7 @@ body {
 }
 
 .nav {
-    width: 100%;
+    width: calc(100% - 40px);
     padding: 20px;
     background-color: rgb(220, 220, 220);
 }
@@ -78,5 +78,4 @@ body {
     vertical-align: top;
     text-wrap: wrap;
     white-space: wrap;
-    overflow: scroll;
 }
