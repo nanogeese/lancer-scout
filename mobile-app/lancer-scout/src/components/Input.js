@@ -12,7 +12,7 @@ import { screen, colors } from "../constants"
 const FormHeader = ({ title, setValue }) => {
     return (
         <View style={styles.headerContainer} onLayout={(e) => {
-            console.log(e.nativeEvent.layout.y)
+            // store the scroll offset here for convenience, it won't be included in upload data
             setValue(e.nativeEvent.layout.y)
         }}>
             <Text style={styles.headerText} numberOfLines={1}>
@@ -24,7 +24,7 @@ const FormHeader = ({ title, setValue }) => {
     )
 }
 
-const FormTextInput = ({ title, placeholder, value, setValue }) => {
+const FormTextInput = ({ title, maxLength, placeholder, value, setValue }) => {
     const inputRef = useRef()
 
     const focus = () => inputRef.current.focus()
@@ -38,37 +38,44 @@ const FormTextInput = ({ title, placeholder, value, setValue }) => {
             </Text>
             <TouchableWithoutFeedback onPress={focus}>
                 <View style={styles.inputTextContainer}>
-                    <TextInput ref={inputRef} placeholder={placeholder} value={value} onChangeText={setValue} style={styles.inputText} placeholderTextColor={colors.dark} cursorColor={colors.crimson} selectionColor={colors.crimson} color multiline />
+                    <TextInput ref={inputRef} placeholder={placeholder} maxLength={maxLength} value={value} onChangeText={setValue} style={styles.inputText} placeholderTextColor={colors.dark} cursorColor={colors.crimson} selectionColor={colors.crimson} color multiline />
                 </View>
             </TouchableWithoutFeedback>
         </View>
     )
 }
 
-const FormNumberInput = ({ title, value, setValue }) => {
+const FormNumberInput = ({ title, value, setValue, dataType }) => {
     const inputRef = useRef()
 
     const focus = () => inputRef.current.focus()
+
+    const maxValue = Math.pow(2, parseInt(dataType.split("bit")[0])) - 1
+    const clampInputValue = (v) => {
+        if (v < 0) return 0
+        if (v >= maxValue) return maxValue
+        return v
+    }
 
     const setInputValue = (v) => {
         const num = parseFloat(v)
         if(isNaN(num)){
             setValue(0)
         } else {
-            setValue(num)
+            setValue(clampInputValue(num))
         }
     }
 
     const minus = () => {
         if(value > 0){
             // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
-            setValue(value - 1)
+            setValue(clampInputValue(value - 1))
         }
     }
 
     const plus = () => {
         // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
-        setValue(value + 1)
+        setValue(clampInputValue(value + 1))
     }
 
     return (
@@ -99,40 +106,48 @@ const FormNumberInput = ({ title, value, setValue }) => {
     )
 }
 
-const FormTimerInput = ({ title, value, setValue }) => {
+const FormTimerInput = ({ title, value, setValue, dataType }) => {
     const [running, setRunning] = useState(false)
 
     const [startTimestep, setStartTimestep] = useState(0)
-    const [endTimestep, setEndTimestep] = useState(0)
 
-    const timeElapsed = running ? endTimestep - startTimestep : value
+    console.log({value})
 
     useEffect(() => {
         if(running){
-            const interval = setInterval(() => setEndTimestep(Date.now()), 500)
+            const interval = setInterval(() => {
+                setValue(clampInputValue(Math.round((Date.now() - startTimestep) / 1000)))
+            }, 500)
+
+            console.log("set v to " + clampInputValue(Math.round((Date.now() - startTimestep) / 1000)))
 
             return () => clearInterval(interval)
         }
-    }, [running])
+    }, [running, startTimestep])
 
     const restart = () => {
         // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
         setValue(0)
         setStartTimestep(Date.now())
-        setEndTimestep(Date.now())
     }
 
     const start = () => {
         // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
         setRunning(true)
-        setStartTimestep(Date.now() - timeElapsed)
-        setEndTimestep(Date.now())
+        setValue(0)
+        setStartTimestep(Date.now())
+    }
+
+    const maxValue = Math.pow(2, parseInt(dataType.split("bit")[0])) - 1
+    const clampInputValue = (v) => {
+        if (v < 0) return 0
+        if (v >= maxValue) return maxValue
+        return v
     }
 
     const stop = () => {
         // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
         setRunning(false)
-        setValue(timeElapsed)
     }
 
     return (
@@ -146,7 +161,7 @@ const FormTimerInput = ({ title, value, setValue }) => {
                 <View style={styles.inputTextContainer}>
                     <Text style={styles.inputText}>
                         {
-                            format(timeElapsed, { leading: true })
+                            format(value * 1000, { leading: true })
                         }
                     </Text>
                 </View>
@@ -165,7 +180,7 @@ const FormTimerInput = ({ title, value, setValue }) => {
     )
 }
 
-const FormSliderInput = ({ title, value, setValue }) => {
+const FormSliderInput = ({ title, value, setValue, dataType }) => {
     const min = 0
     const max = 10
     const step = 1
@@ -174,6 +189,13 @@ const FormSliderInput = ({ title, value, setValue }) => {
 
     const handleTouchStart = (e) => {
         setTouchX(e.nativeEvent.touches[0].pageX)
+    }
+
+    const maxValue = Math.pow(2, parseInt(dataType.split("bit")[0])) - 1
+    const clampInputValue = (v) => {
+        if (v < 0) return 0
+        if (v >= maxValue) return maxValue
+        return v
     }
 
     const handleTouchMove = (e) => {
@@ -186,7 +208,7 @@ const FormSliderInput = ({ title, value, setValue }) => {
             // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
         }
 
-        setValue(newValue)
+        setValue(clampInputValue(newValue))
         setTouchX(e.nativeEvent.touches[0].pageX)
     }
 
@@ -256,15 +278,22 @@ const FormToggleInput = ({ title, value, setValue }) => {
     )
 }
 
-const FormRadioInput = ({ title, options, value, setValue }) => {
+const FormRadioInput = ({ title, options, value, setValue, dataType }) => {
     const optionRenders = []
+
+    const maxValue = Math.pow(2, parseInt(dataType.split("bit")[0])) - 1
+    const clampInputValue = (v) => {
+        if (v < 0) return 0
+        if (v >= maxValue) return maxValue
+        return v
+    }
 
     options.forEach((option, index) => {
         const setSelectedOption = () => {
             if(value != index){
                 // ReactNativeHapticFeedback.trigger("impactLight", { enableVibrateFallback: false })
             }
-            setValue(index)
+            setValue(clampInputValue(index))
         }
 
         optionRenders.push(
@@ -294,7 +323,7 @@ const FormRadioInput = ({ title, options, value, setValue }) => {
     )
 }
 
-const FormDropdownInput = ({ title, options, value, setValue }) => {
+const FormDropdownInput = ({ title, options, value, setValue, dataType }) => {
     const [menuOpen, setMenuOpen] = useState(false)
 
     const toggleMenu = () => {
@@ -302,10 +331,17 @@ const FormDropdownInput = ({ title, options, value, setValue }) => {
         setMenuOpen(!menuOpen)
     }
 
+    const maxValue = Math.pow(2, parseInt(dataType.split("bit")[0])) - 1
+    const clampInputValue = (v) => {
+        if (v < 0) return 0
+        if (v >= maxValue) return maxValue
+        return v
+    }
+
     const optionRenders = []
     options.forEach((option, index) => {
         const selectOption = () => {
-            setValue(index)
+            setValue(clampInputValue(index))
             toggleMenu()
         }
 

@@ -1,5 +1,5 @@
 // The name of my cache
-const cacheName = "my-pwa-shell-v1.03";
+const cacheName = "lancer-scout-pwa-v1.02";
 //The files I'm going to cache
 const filesToCache = [
   "/",
@@ -9,11 +9,11 @@ const filesToCache = [
   "./static/media/OpenSans.071a1becc7f00e33cc5b.ttf",
   "./favicon-16.png",
   "./favicon-32.png",
-  "./static/js/205.f9d03569.js",
-  "./static/js/205.f9d03569.js.LICENSE.txt",
-  "./static/js/205.f9d03569.js.map",
-  "./static/js/main.c41f302b.js",
-  "./static/js/main.c41f302b.js.map"
+  "./static/js/205.302f0300.js",
+  "./static/js/205.302f0300.js.LICENSE.txt",
+  "./static/js/205.302f0300.js.map",
+  "./static/js/main.f8d79430.js",
+  "./static/js/main.f8d79430.js.map"
 ];
 
 self.addEventListener("install", e => {

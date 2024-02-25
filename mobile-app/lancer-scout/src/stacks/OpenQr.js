@@ -35,7 +35,6 @@ const OpenQrStack = ({ route, navigation }) => {
 
     return (
         <View style={styles.wrapper}>
-            <Text style={styles.label}>Scan To Upload</Text>
             <QR data={data} />
             <View style={{ width: 300, marginTop: 10 }}>
                 <Button handlePress={handleDelete} marginHorizontal={0}>Delete</Button>
@@ -51,12 +50,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: colors.white
-    },
-    label: {
-        fontFamily: "Open Sans",
-        fontSize: 24,
-        color: colors.black,
-        marginBottom: 20
     }
 })
 

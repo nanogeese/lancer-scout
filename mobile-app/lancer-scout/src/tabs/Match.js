@@ -88,7 +88,31 @@ const MatchTab = () => {
                 }
             }} />
             <Stack.Screen name={"OpenQr"} component={OpenQr} options={{
-                presentation: "modal"
+                headerShown: true,
+                headerTitle: "Scan QR Code",
+                headerStyle: {
+                    height: screen.top + 70,
+                    backgroundColor: colors.white,
+                    shadowOpacity: 0
+                },
+                headerTitleStyle: {
+                    fontFamily: "Open Sans",
+                    fontWeight: "700",
+                    fontSize: 24,
+                    color: colors.black
+                },
+                headerLeft: ({ onPress }) => {
+                    return (
+                        <TouchableWithoutFeedback onPress={() => {
+                            // ReactNativeHapticFeedback.trigger("impactMedium", { enableVibrateFallback: false })
+                            onPress()
+                        }}>
+                            <View style={{ flex: 1, width: 80, alignItems: "center", justifyContent: "center" }}>
+                                <FontAwesomeIcon icon={faChevronLeft} size={24} color={colors.crimson} />
+                            </View>
+                        </TouchableWithoutFeedback>
+                    )
+                }
             }} />
         </Stack.Navigator>
     )
