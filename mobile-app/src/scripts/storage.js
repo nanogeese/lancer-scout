@@ -1,4 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import axios from "axios"
+import to from "await-to-js"
 
 import validateSchema from "./validateSchema"
 
@@ -18,10 +20,18 @@ const getSchema = async (mode) => {
     }
 }
 
-const setSchema = async (schema, mode) => {
-    const status = validateSchema(JSON.parse(schema))
+const setSchema = async (schemaURL, mode) => {
+    const [err, res] = await to(axios.get(schemaURL))
 
-    if (status.success) await AsyncStorage.setItem("lancer-scout-schema-" + mode, schema)
+    if (err) return {
+        success: false,
+        reason: "Unable to retrieve the provided URL. Please make sure you are connected to wifi and the provided URL exists."
+    }
+
+    const schema = res.data
+    const status = validateSchema(schema, mode)
+
+    if (status.success) await AsyncStorage.setItem("lancer-scout-schema-" + mode, typeof schema == "string" ? schema : JSON.stringify(schema))
 
     return status
 }

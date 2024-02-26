@@ -16,6 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "array-unique": "^0.3.2",
+    "await-to-js": "^3.0.0",
     "axios": "^1.6.7",
     "jsqr": "^1.4.0",
     "lzfjs": "^1.0.1",

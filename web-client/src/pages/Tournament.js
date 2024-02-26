@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react"
 
+import axios from "axios"
+import to from "await-to-js"
+
+import validateSchema from "../scripts/validateSchema"
 import { createNewTournament, getTournaments } from "../scripts/api"
 
 const TournamentPage = () => {
@@ -28,9 +32,27 @@ const TournamentPage = () => {
         }
     }
 
-    const handleCreateNewTournament = () => {
-        createNewTournament(tournamentNameInput, pitSchemaInput, matchSchemaInput, (success) => {
+    const handleCreateNewTournament = async () => {
+        const [errPit, resPit] = await to(axios.get(pitSchemaInput))
+        if (errPit) return alert("Unable to retrieve the provided URL. Please make sure you are connected to wifi and the provided URL exists.")
+        const rawSchemaPit = resPit.data
+        const statusPit = validateSchema(rawSchemaPit, "Pit")
+        if (!statusPit.success) return alert(statusPit.reason)
+        const pitSchema = typeof rawSchemaPit == "string" ? rawSchemaPit : JSON.stringify(rawSchemaPit)
+
+        const [errMatch, resMatch] = await to(axios.get(matchSchemaInput))
+        if (errMatch) return alert("Unable to retrieve the provided URL. Please make sure you are connected to wifi and the provided URL exists.")
+        const rawSchemaMatch = resMatch.data
+        const statusMatch = validateSchema(rawSchemaMatch, "Match")
+        if (!statusMatch.success) return alert(statusMatch.reason)
+
+        const matchSchema = typeof rawSchemaMatch == "string" ? rawSchemaMatch : JSON.stringify(rawSchemaMatch)
+
+        createNewTournament(tournamentNameInput, pitSchema, matchSchema, (success) => {
             if (!success) alert("A tournament already exists with this name.")
+            else {
+                alert("Successfully created tournament. To use this tournament refresh the page,select it in the above menu, and apply.")
+            }
         })
     }
 
@@ -68,8 +90,8 @@ const TournamentPage = () => {
                     <label><b>Create New Tournament</b></label>
                     <hr style={{ width: "540px" }} />
                     <label>Tournament Name: <input type={"text"} value={tournamentNameInput} onChange={(e) => setTournamentNameInput(e.target.value)} /></label>
-                    <label>Pit Schema: <input type={"text"} value={pitSchemaInput} onChange={(e) => setPitSchemaInput(e.target.value)} /></label>
-                    <label>Match Schema: <input type={"text"} value={matchSchemaInput} onChange={(e) => setMatchSchemaInput(e.target.value)} /></label>
+                    <label>Pit Schema URL: <input type={"text"} value={pitSchemaInput} onChange={(e) => setPitSchemaInput(e.target.value)} /></label>
+                    <label>Match Schema URL: <input type={"text"} value={matchSchemaInput} onChange={(e) => setMatchSchemaInput(e.target.value)} /></label>
                     <div className={"button"} onClick={handleCreateNewTournament}>Create</div>
                 </div>
             </div>

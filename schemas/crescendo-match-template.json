@@ -16,7 +16,7 @@
         "title": "Scout Name",
         "ui": {
             "type": "text",
-            "maxLength": "20"
+            "maxLength": 20
         },
         "dataType": "string"
     },
@@ -25,10 +25,39 @@
         "ui": {
             "type": "dropdown",
             "options": [
-                "321 Robolancers",
-                "427 Lance-A-Lot",
-                "433 Firebirds",
-                "341 Miss Daisy"
+                "25 - Raider Robotix",
+                "303 - The T.E.S.T. Team",
+                "341 - Miss Daisy",
+                "423 - Simple Machines FRC 423",
+                "427 - LANCE-A-LOT",
+                "433 - Firebirds",
+                "708 - Hatters Robotics",
+                "709 - Femme Tech Fatale",
+                "816 - Anomaly",
+                "1089 - Team Mercury",
+                "1143 - Cruzin' Comets",
+                "1168 - Malvern Robotics",
+                "1391 - The Metal Moose",
+                "1403 - Team 1403 Cougar Robotics",
+                "2095 - Direct Current",
+                "2234 - Alternating Current",
+                "2458 - Team Chaos",
+                "2539 - Krypton Cougars",
+                "2559 - Normality Zero",
+                "2590 - Nemesis",
+                "2607 - The Fighting RoboVikings",
+                "3637 - The Daleks",
+                "4285 - Camo-Bots",
+                "4637 - BambieBotz",
+                "5181 - Explorer Robotics",
+                "5401 - Fightin' Robotic Owls",
+                "5407 - Wolfpack Robotics",
+                "5684 - Iron Mechs",
+                "5895 - Peddie Robotics",
+                "6226 - Blue Devils",
+                "6808 - William Tennent Robotics",
+                "7414 - RetroRobotics",
+                "9027 - PATH to Domination"
             ]
         },
         "dataType": "6bit"
@@ -295,7 +324,7 @@
         "title": "Comments",
         "ui": {
             "type": "text",
-            "maxLength": "100"
+            "maxLength": 100
         },
         "dataType": "string"
     }
