@@ -5,9 +5,10 @@ import { SafeAreaView, View, ScrollView, Text, StyleSheet } from "react-native"
 import MatchListItem from "../components/ScoutListItem"
 import Button from "../components/Button"
 
-import { getSchema, getEntries } from "../scripts/storage"
+import { getSchema, getEntries, setSchema } from "../scripts/storage"
 
 import { colors } from "../constants"
+import { generateDataFromBuffer } from "../scripts/dataBuffer"
 
 const DefaultStack = ({ route, navigation }) => {
     const { mode } = route.params
@@ -16,13 +17,29 @@ const DefaultStack = ({ route, navigation }) => {
     const [entries, setEntries] = useState([])
 
     useEffect(() => {
-        getSchema(mode).then(setForm)
-        getEntries(mode).then(setEntries)
+        const pullLatestSchemaAndEntries = () => {
+            getSchema(mode).then(storedSchema => {
+                setForm(storedSchema)
 
-        navigation.addListener("state", () => {
-            getSchema(mode).then(setForm)
-            getEntries(mode).then(setEntries)
-        })
+                const filteredSchema = storedSchema.filter(e => e.ui.type != "header") || []
+
+                getEntries(mode).then(storedEntries => {
+                    const filteredEntries = storedEntries.filter((storedEntry) => {
+                        const buffer = []
+                        
+                        for (let i = 0;i<storedEntry.buffer.length;i++) buffer.push(storedEntry.buffer.charCodeAt(i))
+
+                        return generateDataFromBuffer(buffer, filteredSchema) != null
+                    })
+
+                    setEntries(filteredEntries)
+                })
+            })
+        }
+
+        pullLatestSchemaAndEntries()
+
+        navigation.addListener("state", pullLatestSchemaAndEntries)
     }, [])
 
     const matchListItemRenders = []

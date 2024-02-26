@@ -1,105 +1,79 @@
-// const validateSchema = (schema) => {
-//     if (!Array.isArray(schema)) return {
-//         success: false,
-//         reason: `Schema must be of type array. Found schema of type ${typeof schema}.`
-//     }
+const failureStatus = (reason) => ({ success: false, reason: "Provided schema " + reason })
 
-//     schema.forEach((prompt, index) => {
-//         if (typeof prompt != "object") return {
-//             success: false,
-//             reason: `Prompts must be of type object. Found prompt of type ${typeof prompt} at index ${index}.`
-//         }
+const validateSchema = (schema, mode) => {
+    if (typeof schema == "string") {
+        try {
+            schema = JSON.parse(schema)
+        } catch (e) {
+            return failureStatus("string is not valid json")
+        }
+    }
 
-//         const promptKeys = Object.keys(prompt)
+    if (!Array.isArray(schema)) return failureStatus("is not an array")
 
-//         if (!promptKeys.includes("title")) return {
-//             success: false,
-//             reason: `Prompts must include a title. No title found in prompt at index ${index}.`
-//         }
+    const promptTitles = []
 
-//         if (typeof prompt.title != "string") return {
-//             success: false,
-//             reason: `Prompts' title must be of type string. Found title of type ${typeof prompt.type} in prompt at index ${index}.`
-//         }
+    for(let i = 0;i<schema.length;i++){
+        const prompt = schema[i]
 
-//         if (!promptKeys.includes("ui")) return {
-//             success: false,
-//             reason: `Prompts must include a ui. No ui found in prompt at index ${index}.`
-//         }
+        if (typeof prompt != "object" || prompt == null || Array.isArray(prompt)) return failureStatus("has a non object prompt")
 
-//         if (typeof prompt.ui != "object") return {
-//             success: false,
-//             reason: `Prompts' ui must be of type object. Found ui of type ${typeof prompt.ui} in prompt at index ${index}.`
-//         }
+        if (!prompt.title) return failureStatus("has a prompt without a title")
 
-//         const uiKeys = Object.keys(prompt.ui)
+        if (promptTitles.includes(prompt.title)) return failureStatus("has prompts with duplicate titles")
+        promptTitles.push(prompt.title)
 
-//         if (!uiKeys.includes("type")) return {
-//             success: false,
-//             reason: `Prompts' ui must include a type. No type found in ui of prompt at index ${index}.`
-//         }
+        if (!prompt.ui) return failureStatus("has a prompt without a ui")
+        if (prompt.ui.type != "header" && !prompt.dataType) return failureStatus("has a prompt without a data type")
 
-//         if (!["header", "text", "number", "timer", "slider", "toggle", "radio", "dropdown"].includes(prompt.ui.type)) return {
-//             success: false,
-//             reason: `Prompts' ui must include a type equal to "header", "text", "number", "timer", "slider", "toggle", "radio", or "dropdown". Found type with value ${prompt.ui.type} in ui of prompt at index ${index}.`
-//         }
-        
-//         if(prompt.ui.type != "header"){
-//             if (!promptKeys.includes("dataType")) return {
-//                 success: false,
-//                 reason: `Non-header prompts must include a dataType. No dataType found in prompt at index ${index}.`
-//             }
+        if (![ "header", "text", "number", "timer", "slider", "toggle", "radio", "dropdown" ].includes(prompt.ui.type)) return failureStatus("has an invalid ui type")
 
-//             if (!["boolean", "string", "4bit", "6bit", "8bit", "16bit"].includes(prompt.dataType)) return {
-//                 success: false,
-//                 reason: `Non-header prompts must include a dataType equal to "boolean", "string", "4bit", "6bit", "8bit", or "16bit". Found dataType with value ${prompt.dataType} in prompt at index ${index}.`
-//             }
+        switch(prompt.ui.type){
+            case "header":
+                break
+            case "text":
+                if (!prompt.ui.maxLength || typeof prompt.ui.maxLength != "number") return failureStatus("has an invalid max length for a text prompt")
+                if (prompt.dataType != "string") return failureStatus("has a data type other than 'string' attached to a text prompt")
+                break
+            case "number":
+            case "timer":
+                if (![ "1bit", "2bit", "4bit", "6bit", "8bit", "16bit" ].includes(prompt.dataType)) return failureStatus("has an invalid data type attached to a number prompt")
+                break
+            case "slider":
+                if (prompt.dataType != "4bit") return failureStatus("has a data type other than '4bit' attached to slider prompt")
+                break
+            case "toggle":
+                if (prompt.dataType != "boolean") return failureStatus("has a data type other than 'boolean' attached to a toggle prompt")
+                break
+            case "radio":
+            case "dropdown":
+                if (!prompt.ui.options || !Array.isArray(prompt.ui.options) || !prompt.ui.options.every(option => typeof option == "string")) return failureStatus("has an invalid options array for a selection based prompt")
 
-//             if (prompt.ui.type == "toggle" && prompt.dataType != "boolean") return {
-//                 success: false,
-//                 reason: `Toggle prompts must have a dataType of "boolean". Found dataType with value ${prompt.dataType} in prompt at index ${index}.`
-//             }
+                let expectedDataType = "1bit"
 
-//             if (prompt.ui.type == "text" && prompt.dataType != "string") return {
-//                 success: false,
-//                 reason: `Text prompts must have a dataType of "string". Found dataType with value ${prompt.dataType} in prompt at index ${index}.`
-//             }
+                if (prompt.ui.options.length > Math.pow(2, 1)) expectedDataType = "2bit"
+                if (prompt.ui.options.length > Math.pow(2, 2)) expectedDataType = "4bit"
+                if (prompt.ui.options.length > Math.pow(2, 4)) expectedDataType = "6bit"
+                if (prompt.ui.options.length > Math.pow(2, 6)) expectedDataType = "8bit"
+                if (prompt.ui.options.length > Math.pow(2, 8)) expectedDataType = "16bit"
 
-//             if ((prompt.ui.type != "toggle" && prompt.ui.type != "text") && !["4bit", "6bit", "8bit", "16bit"].includes(prompt.dataType)) return {
-//                 success: false,
-//                 reason: `Number or option based prompts must have a numeric dataType ("4bit", "6bit", "8bit", or "16bit"). Found dataType with value ${prompt.dataType} in prompt at index ${index}.`
-//             }
+                if (prompt.dataType != expectedDataType) return failureStatus("has a suboptimal data type attached to a selection based prompt")
+                break
+        }
+    }
 
-//             if(prompt.ui.type == "radio" || prompt.ui.type == "dropdown"){
-//                 if (!uiKeys.includes("options")) return {
-//                     success: false,
-//                     reason: `Option based prompts' ui must include options. No options found in prompt at index ${index}.`
-//                 }
+    if (!promptTitles.includes("Team Name")) return failureStatus("does not have the required prompt with title 'Team Name'")
 
-//                 if (!Array.isArray(prompt.ui.options)) return {
-//                     success: false,
-//                     reason: `Option based prompt ui options must be of type array. Found options of type ${prompt.ui.options} in ui of prompt at index ${index}.`
-//                 }
+    const teamNamePrompt = schema.find(prompt => prompt.title == "Team Name")
+    if (![ "text", "radio", "dropdown" ].includes(teamNamePrompt.ui.type)) return failureStatus("has a non string generating type for the required prompt with title 'Team Name'")
 
-//                 if (!prompt.ui.options.every(option => typeof option == "string")) return {
-//                     success: false,
-//                     reason: `Option based prompt ui options must be of type string. Found option with a non-string type in ui of prompt at index ${index}.`
-//                 }
+    if (mode == "Match") {
+        if (!promptTitles.includes("Match Number")) return failureStatus("does not have the required prompt with title 'Match Number'")
 
-//                 if (prompt.ui.options.length == 0) return {
-//                     success: false,
-//                     reason: `Option based prompt ui options array must not be empty. Found empty options in ui of prompt at index ${index}.`
-//                 }
-//             }
-//         }
-//     })
+        const matchNumberPrompt = schema.find(prompt => prompt.title == "Match Number")
+        if (matchNumberPrompt.ui.type != "number") return failureStatus("has a ui type other than 'number' for the required prompt with title 'Match Number'")
+    }
 
-//     return {
-//         success: true
-//     }
-// }
-
-const validateSchema = (schema) => {
     return {
         success: true
     }

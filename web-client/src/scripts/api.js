@@ -38,8 +38,8 @@ const getSchemas = (callback) => {
 
 const uploadMatchScout = (formId, formJson, callback) => {
     const tournamentName = localStorage.getItem("tournamentName") ?? ""
-    const matchNumber = formJson["Match Number"] // TODO: read this off of the form json or make it a required schema entry
-    const teamName = formJson["Team Name"] // TODO: read this off of the form json or make it a required schema entry
+    const matchNumber = formJson["Match Number"]
+    const teamName = formJson["Team Name"]
     const clientFormId = formId
     const jsonValues = formJson
 
@@ -59,7 +59,7 @@ const uploadMatchScout = (formId, formJson, callback) => {
 }
 
 const uploadPitScout = (formId, formJson, callback) => {
-    const teamName = formJson["Team Name"] // TODO: read this off of the form json or make it a required schema entry
+    const teamName = formJson["Team Name"]
     const clientFormId = formId
     const jsonValues = formJson
 

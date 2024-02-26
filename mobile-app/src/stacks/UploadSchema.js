@@ -11,7 +11,7 @@ import { colors } from "../constants"
 const UploadSchemaStack = ({ route, navigation }) => {
     const { mode } = route.params
 
-    const [inputSchema, setInputSchema] = useState("[]")
+    const [inputSchemaURL, setInputSchemaURL] = useState("")
 
     const [uploaded, setUploaded] = useState(false)
     const uploadSchema = async () => {
@@ -19,12 +19,12 @@ const UploadSchemaStack = ({ route, navigation }) => {
 
         setUploaded(true)
 
-        const status = await setSchema(inputSchema, mode)
+        const validationStatus = await setSchema(inputSchemaURL, mode)
 
-        if(status.success){
+        if(validationStatus.success){
             navigation.goBack()
         } else {
-            alert("Failed To Upload Schema\n\n" + status.reason)
+            alert("Failed To Upload Schema\n\n" + validationStatus.reason)
             // Alert.alert("Failed To Upload Schema", status.reason)
 
             setUploaded(false)
@@ -34,7 +34,7 @@ const UploadSchemaStack = ({ route, navigation }) => {
     return (
         // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.wrapper}>
-                <TextInput style={styles.input} value={inputSchema} onChangeText={setInputSchema} multiline />
+                <TextInput style={styles.input} placeholder={"Paste URL to schema for " + mode + " Scouting here"} placeholderTextColor={colors.dark} value={inputSchemaURL} onChangeText={setInputSchemaURL} multiline />
                 <Button handlePress={uploadSchema}>Upload</Button>
             </View>
         // </TouchableWithoutFeedback>

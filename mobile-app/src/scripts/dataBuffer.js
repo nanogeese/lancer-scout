@@ -180,8 +180,8 @@ const generateBitArrayFromValueAndType = (value, type) => {
         return generateBitArrayFromNumber(value, 6)
     } else if(type == "8bit"){
         return generateBitArrayFromNumber(value, 8)
-    } else if(type == "8bit"){
-        return generateBitArrayFromNumber(value, 8)
+    } else if(type == "16bit"){
+        return generateBitArrayFromNumber(value, 16)
     }
 }
 

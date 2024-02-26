@@ -24,7 +24,7 @@ const FormHeader = ({ title, setValue }) => {
     )
 }
 
-const FormTextInput = ({ title, maxLength, placeholder, value, setValue }) => {
+const FormTextInput = ({ title, maxLength, value, setValue }) => {
     const inputRef = useRef()
 
     const focus = () => inputRef.current.focus()
@@ -38,7 +38,7 @@ const FormTextInput = ({ title, maxLength, placeholder, value, setValue }) => {
             </Text>
             <TouchableWithoutFeedback onPress={focus}>
                 <View style={styles.inputTextContainer}>
-                    <TextInput ref={inputRef} placeholder={placeholder} maxLength={maxLength} value={value} onChangeText={setValue} style={styles.inputText} placeholderTextColor={colors.dark} cursorColor={colors.crimson} selectionColor={colors.crimson} color multiline />
+                    <TextInput ref={inputRef} maxLength={maxLength} value={value} onChangeText={setValue} style={styles.inputText} cursorColor={colors.crimson} selectionColor={colors.crimson} color multiline />
                 </View>
             </TouchableWithoutFeedback>
         </View>
@@ -111,15 +111,11 @@ const FormTimerInput = ({ title, value, setValue, dataType }) => {
 
     const [startTimestep, setStartTimestep] = useState(0)
 
-    console.log({value})
-
     useEffect(() => {
         if(running){
             const interval = setInterval(() => {
                 setValue(clampInputValue(Math.round((Date.now() - startTimestep) / 1000)))
             }, 500)
-
-            console.log("set v to " + clampInputValue(Math.round((Date.now() - startTimestep) / 1000)))
 
             return () => clearInterval(interval)
         }
