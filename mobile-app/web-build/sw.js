@@ -1,5 +1,5 @@
 // The name of my cache
-const cacheName = "lancer-scout-pwa-v1.03";
+const cacheName = "lancer-scout-pwa-v1.04";
 //The files I'm going to cache
 const filesToCache = [
   "/",

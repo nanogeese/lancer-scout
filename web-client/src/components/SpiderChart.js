@@ -33,7 +33,7 @@ const SpiderChart = ({ width, height, style, data, axisMaximums }) => {
         }
     }
 
-    const indicatorPoints = data.map((point, index) => polarToCartesian(2 * Math.PI * (index / data.length), 9 * (Math.min(point.value / axisMaximums[point.key], 1) || 1)))
+    const indicatorPoints = data.map((point, index) => polarToCartesian(2 * Math.PI * (index / data.length), 9 * (Math.min(point.value / axisMaximums[point.key], 1) || 0)))
 
     const indicatorRenders = []
     for(let i = 0;i<data.length;i++){
