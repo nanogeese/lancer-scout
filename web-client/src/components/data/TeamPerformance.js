@@ -19,8 +19,6 @@ const TeamPerformance = ({ state, setState }) => {
         record: []
     })
 
-    console.log({ multiQuery, multiQueryOptions })
-
     // queried form data
     const [queriedData, setQueriedData] = useState([])
     const numericQueriedData = queriedData.filter((entry) => typeof entry.value == "number")
@@ -170,7 +168,7 @@ const TeamPerformance = ({ state, setState }) => {
                                     <hr />
                                     <h2>Quantitative Overview</h2>
                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                                        <SpiderChart width={400} height={400} data={toggledSpiderChartData} axisMaximums={axisMaximums} />
+                                        <SpiderChart width={600} height={400} data={toggledSpiderChartData} axisMaximums={axisMaximums} />
                                         <div className={"vertical-divider"} style={{ height: 400 }} />
                                         <ToggleablesList style={{ height: 400 }} toggleables={toggleables} setShowAtIndex={setShowAtIndex} setLabelAtIndex={setLabelAtIndex} />
                                     </div>

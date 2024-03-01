@@ -141,7 +141,7 @@ const PitScoutOverview = ({ state, setState }) => {
                                     <hr />
                                     <h2>Quantitative Overview</h2>
                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                                        <MultiSpiderChart width={400} height={400} data={toggledSpiderChartData} axisMaximums={axisMaximums} />
+                                        <MultiSpiderChart width={600} height={400} data={toggledSpiderChartData} axisMaximums={axisMaximums} />
                                         <div className={"vertical-divider"} style={{ height: 400 }} />
                                         <ToggleablesList style={{ height: 400 }} toggleables={toggleables} setShowAtIndex={setShowAtIndex} setLabelAtIndex={setLabelAtIndex} />
                                     </div>

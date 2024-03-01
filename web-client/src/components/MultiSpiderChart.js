@@ -19,7 +19,7 @@ const MultiSpiderChart = ({ width, height, style, data, axisMaximums }) => {
         )
     }
 
-    const bestIndicatorPoints = data.map((point, index) => polarToCartesian(2 * Math.PI * (index / data.length), 9 * Math.min(point.best / Math.max(axisMaximums[point.key], 1), 1)))
+    const bestIndicatorPoints = data.map((point, index) => polarToCartesian(2 * Math.PI * (index / data.length), 9 * (Math.min(point.best / axisMaximums[point.key], 1) || 0)))
 
     const bestIndicatorRenders = []
     for(let i = 0;i<data.length;i++){
@@ -33,7 +33,7 @@ const MultiSpiderChart = ({ width, height, style, data, axisMaximums }) => {
         bestIndicatorConnectionsPath += ` L ${bestIndicatorPoints[i].x} ${bestIndicatorPoints[i].y}`
     }
 
-    const averageIndicatorPoints = data.map((point, index) => polarToCartesian(2 * Math.PI * (index / data.length), 9 * Math.min(point.average / Math.max(axisMaximums[point.key], 1), 1)))
+    const averageIndicatorPoints = data.map((point, index) => polarToCartesian(2 * Math.PI * (index / data.length), 9 * (Math.min(point.average / axisMaximums[point.key], 1) || 0)))
 
     const averageIndicatorRenders = []
     for(let i = 0;i<data.length;i++){
@@ -47,7 +47,7 @@ const MultiSpiderChart = ({ width, height, style, data, axisMaximums }) => {
         averageIndicatorConnectionsPath += ` L ${averageIndicatorPoints[i].x} ${averageIndicatorPoints[i].y}`
     }
 
-    const worstIndicatorPoints = data.map((point, index) => polarToCartesian(2 * Math.PI * (index / data.length), 9 * Math.min(point.worst / Math.max(axisMaximums[point.key], 1), 1)))
+    const worstIndicatorPoints = data.map((point, index) => polarToCartesian(2 * Math.PI * (index / data.length), 9 * (Math.min(point.worst / axisMaximums[point.key], 1) || 0)))
 
     const worstIndicatorRenders = []
     for(let i = 0;i<data.length;i++){
@@ -82,7 +82,7 @@ const MultiSpiderChart = ({ width, height, style, data, axisMaximums }) => {
         <svg width={width} height={height} style={style} viewBox={"0 0 36 30"}>
             <path fill={"rgb(102, 227, 156)"} stroke={"rgb(63, 158, 104)"} strokeWidth={0.1} d={bestIndicatorConnectionsPath} />
             <path fill={"rgb(255, 203, 130)"} stroke={"rgb(201, 131, 34)"} strokeWidth={0.1} d={averageIndicatorConnectionsPath} />
-            <path fill={"rgb(237, 135, 128)"} stroke={"rgb(173, 65, 57)"} strokeWidth={0.1} d={worstIndicatorConnectionsPath} />
+            <path fill={"rgb(250, 180, 180)"} stroke={"rgb(173, 65, 57)"} strokeWidth={0.1} d={worstIndicatorConnectionsPath} />
             {
                 [...axisRenders, ...bestIndicatorRenders, ...averageIndicatorRenders, ...worstIndicatorRenders, ...labelRenders]
             }
