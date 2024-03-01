@@ -1,5 +1,5 @@
 // The name of my cache
-const cacheName = "lancer-scout-pwa-v1.05";
+const cacheName = "lancer-scout-pwa-v1.06";
 //The files I'm going to cache
 const filesToCache = [
   "/",
@@ -31,5 +31,6 @@ self.addEventListener('fetch', function (event) {
     event.respondWith(
       caches.match(event.request, { ignoreSearch: true, ignoreMethod: true, ignoreVary: true })
         .then(function (response) {
+          response.headers.set("max-age", 60 * 60 * 24 * 365)
           if (response) return response;
         }))}})
