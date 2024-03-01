@@ -1,5 +1,5 @@
 // The name of my cache
-const cacheName = "lancer-scout-pwa-v1.06";
+const cacheName = "lancer-scout-pwa-v1.07";
 //The files I'm going to cache
 const filesToCache = [
   "/",
@@ -27,10 +27,17 @@ self.addEventListener("install", e => {
 
 self.addEventListener('fetch', function (event) {
   if (!navigator.onLine) {
-
     event.respondWith(
-      caches.match(event.request, { ignoreSearch: true, ignoreMethod: true, ignoreVary: true })
-        .then(function (response) {
-          response.headers.set("max-age", 60 * 60 * 24 * 365)
-          if (response) return response;
-        }))}})
+      caches.match(event.request, { ignoreSearch: true, ignoreMethod: true, ignoreVary: true, }).then(function (response) {
+        const newHeaders = new Headers(response.headers)
+        newHeaders.append("Cache-Control", "max-age=31536000")
+
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: newHeaders
+        })
+      })
+    )
+  }
+})
