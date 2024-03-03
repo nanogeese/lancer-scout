@@ -9,6 +9,7 @@ import TeamComparison from "../components/data/TeamComparison"
 import MatchOverview from "../components/data/MatchOverview"
 import PitScoutOverview from "../components/data/PitScoutOverview"
 import { getNumericFields, getNumericMatchFields, getNumericPitFields } from "../scripts/api"
+import StatRanking from "../components/data/StatRanking"
 
 const DataPage = () => {
     const [currentTabIndex, setCurrentTabIndex] = useState(0)
@@ -106,6 +107,14 @@ const DataPage = () => {
         }
     })
 
+    const addStatRanking = () => addTab({
+        type: "Stat Ranking",
+        title: "Stat Ranking",
+        state: {
+            query: null
+        }
+    })
+
     const tabRenders = []
 
     tabs.forEach((tab, index) => {
@@ -156,6 +165,9 @@ const DataPage = () => {
             case "Match Overview":
                 ContentComponent = MatchOverview
                 break
+            case "Stat Ranking":
+                ContentComponent = StatRanking
+                break
         }
     }
 
@@ -179,6 +191,7 @@ const DataPage = () => {
                         <div className={"option"} onClick={addTeamPerformance}>Team Performance</div>
                         {/* <div className={"option"} onClick={addTeamComparison}>Team Comparison</div>
                         <div className={"option"} onClick={addMatchOverview}>Match Overview</div> */}
+                        <div className={"option"} onClick={addStatRanking}>Stat Ranking</div>
                     </div>
                 )
             }
