@@ -25,39 +25,34 @@
         "ui": {
             "type": "dropdown",
             "options": [
-                "25 - Raider Robotix",
-                "303 - The T.E.S.T. Team",
-                "341 - Miss Daisy",
-                "423 - Simple Machines FRC 423",
-                "427 - LANCE-A-LOT",
-                "433 - Firebirds",
-                "708 - Hatters Robotics",
-                "709 - Femme Tech Fatale",
-                "816 - Anomaly",
-                "1089 - Team Mercury",
-                "1143 - Cruzin' Comets",
-                "1168 - Malvern Robotics",
-                "1391 - The Metal Moose",
-                "1403 - Team 1403 Cougar Robotics",
-                "2095 - Direct Current",
-                "2234 - Alternating Current",
-                "2458 - Team Chaos",
-                "2539 - Krypton Cougars",
-                "2559 - Normality Zero",
-                "2590 - Nemesis",
-                "2607 - The Fighting RoboVikings",
-                "3637 - The Daleks",
-                "4285 - Camo-Bots",
-                "4637 - BambieBotz",
-                "5181 - Explorer Robotics",
-                "5401 - Fightin' Robotic Owls",
-                "5407 - Wolfpack Robotics",
-                "5684 - Iron Mechs",
-                "5895 - Peddie Robotics",
-                "6226 - Blue Devils",
-                "6808 - William Tennent Robotics",
-                "7414 - RetroRobotics",
-                "9027 - PATH to Domination"
+                "87 - Diablo",
+                "203 - SOUPERBOTS",
+                "204 - Eastern Robotic Vikings",
+                "272 - Cyber Crusaders",
+                "316 - LUNATECS",
+                "321 - RoboLancers",
+                "365 - Miracle Workerz",
+                "484 - Roboforce",
+                "486 - Positronic Panthers",
+                "714 - Panthera",
+                "1257 - Parallel Universe",
+                "1640 - Sab-BOT-age",
+                "1647 - Iron Devils",
+                "1712 - Dawgma",
+                "2720 - Red Watch Robotics",
+                "2722 - Charge Robotics",
+                "4342 - Demon Robotics",
+                "4575 - Gemini",
+                "5113 - Combustible Lemons",
+                "5457 - Falcobots",
+                "6860 - Equitum Robotics",
+                "6921 - Technados",
+                "7110 - Heights Bytes",
+                "8130 - Absegami Robotics",
+                "8630 - CAP ROBOTICS",
+                "8706 - Malcolm X Shabazz Bulldogs",
+                "8721 - DAIS NAID 8721",
+                "9094 - The Earthquakers"
             ]
         },
         "dataType": "6bit"
@@ -99,13 +94,6 @@
         "dataType": "boolean"
     },
     {
-        "title": "Auto Speaker Notes Attempted",
-        "ui": {
-            "type": "number"
-        },
-        "dataType": "4bit"
-    },
-    {
         "title": "Auto Speaker Notes Scored",
         "ui": {
             "type": "number"
@@ -113,7 +101,7 @@
         "dataType": "4bit"
     },
     {
-        "title": "Auto Amp Notes Attempted",
+        "title": "Auto Speaker Notes Missed",
         "ui": {
             "type": "number"
         },
@@ -127,17 +115,17 @@
         "dataType": "4bit"
     },
     {
+        "title": "Auto Amp Notes Missed",
+        "ui": {
+            "type": "number"
+        },
+        "dataType": "4bit"
+    },
+    {
         "title": "Teleop",
         "ui": {
             "type": "header"
         }
-    },
-    {
-        "title": "Teleop Speaker Notes Attempted",
-        "ui": {
-            "type": "number"
-        },
-        "dataType": "6bit"
     },
     {
         "title": "Teleop Speaker Notes Scored",
@@ -147,7 +135,7 @@
         "dataType": "6bit"
     },
     {
-        "title": "Teleop Amp Notes Attempted",
+        "title": "Teleop Speaker Notes Missed",
         "ui": {
             "type": "number"
         },
@@ -155,6 +143,13 @@
     },
     {
         "title": "Teleop Amp Notes Scored",
+        "ui": {
+            "type": "number"
+        },
+        "dataType": "6bit"
+    },
+    {
+        "title": "Teleop Amp Notes Missed",
         "ui": {
             "type": "number"
         },
