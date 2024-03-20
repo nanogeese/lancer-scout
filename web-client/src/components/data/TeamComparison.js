@@ -1,102 +1,146 @@
 import React, { useEffect, useState } from "react"
 import MultiSegmentDropdownQuery from "../MultiSegmentDropdownQuery"
-import { getTeamNamesAcrossMatchScouting, getTeamOverviewAcrossMatchScouting } from "../../scripts/api"
-import { calculateMergedTeamAnalytics } from "../../scripts/analytics"
+import { getMaximumsAcrossMatchScouting, getTeamNamesAcrossMatchScouting, getTeamOverviewAcrossMatchScouting } from "../../scripts/api"
+import { calculateMergedTeamAnalytics, calculateTeamAnalytics } from "../../scripts/analytics"
+import ToggleablesList from "../ToggleablesList"
+import SpiderChart from "../SpiderChart"
+import MultiSpiderChart from "../MultiSpiderChart"
 
 const TeamComparison = ({ state, setState }) => {
-    // multiQuery is what teams are currently queried
-    const { multiQuery } = state
+    const { teamToggleables, keyToggleables } = state
 
-    // the available options for the dropdown
-    const [allQueryOptions, setAllQueryOptions] = useState([])
-    const multiQueryOptions = {
-        team1: allQueryOptions.filter(name => name != multiQuery.team2),
-        team2: allQueryOptions.filter(name => name != multiQuery.team1)
-    }
+    // global max values in numerical fields which are used to normalize spider chart data
+    const [axisMaximums, setAxisMaximums] = useState({})
 
-    // queried form data
-    const [queriedData, setQueriedData] = useState({
-        team1: [],
-        team2: []
-    })
-    const teamAnalytics1 = calculateMergedTeamAnalytics(queriedData.team1)
-    const teamAnalytics2 = calculateMergedTeamAnalytics(queriedData.team2)
+    // on start retrieve these maximums
+    useEffect(() => {
+        getTeamNamesAcrossMatchScouting((teamNames) => {
+            const updatedTeamToggleables = []
 
-    // update parent state when part of query changes, update dropdown options as needed
-    const setMultiQuery = (value) => {
+            let requiresUpdate = false
+
+            teamNames.forEach(teamName => {
+                const toggleable = teamToggleables.find(toggleable => toggleable.key == teamName)
+
+                if (toggleable) updatedTeamToggleables.push(toggleable)
+                else {
+                    requiresUpdate = true
+
+                    updatedTeamToggleables.push({
+                        key: teamName,
+                        label: teamName,
+                        show: true
+                    })
+                }
+            })
+
+            teamToggleables.forEach(teamToggleable => {
+                if(!teamNames.includes(teamToggleable.key)) requiresUpdate = true
+            })
+
+            if (requiresUpdate) {
+                const temp = {...state}
+
+                temp.teamToggleables = updatedTeamToggleables
+
+                setState(temp)
+            }
+        })
+
+        getMaximumsAcrossMatchScouting((maximums) => {
+            setAxisMaximums(maximums)
+        })
+    }, [])
+
+    const setShowTeamAtIndex = (index, value) => {
         const temp = {...state}
 
-        temp.multiQuery = value
+        temp.teamToggleables[index].show = value
 
         setState(temp)
     }
 
+    const setTeamLabelAtIndex = (index, value) => {
+        const temp = {...state}
+
+        temp.teamToggleables[index].label = value
+
+        setState(temp)
+    }
+
+    const setShowKeyAtIndex = (index, value) => {
+        const temp = {...state}
+
+        temp.keyToggleables[index].show = value
+
+        setState(temp)
+    }
+
+    const setKeyLabelAtIndex = (index, value) => {
+        const temp = {...state}
+
+        temp.keyToggleables[index].label = value
+
+        setState(temp)
+    }
+
+    const [allTeamOverviews, setAllTeamOverviews] = useState({})
+    
     useEffect(() => {
         getTeamNamesAcrossMatchScouting((teamNames) => {
-            setAllQueryOptions(teamNames)
+            Promise.all(teamNames.map(teamName => {
+                return new Promise((resolve) => {
+                    getTeamOverviewAcrossMatchScouting(teamName, (performances) => {
+                        const numericAnalytics = calculateTeamAnalytics(performances).numeric
+
+                        Object.keys(numericAnalytics).forEach(key => numericAnalytics[key] = numericAnalytics[key].average)
+
+                        resolve({ data: numericAnalytics, teamName })
+                    })
+                })
+            })).then((teamOverviews) => {
+                const temp = {}
+
+                teamOverviews.forEach(overview => temp[overview.teamName] = overview.data)
+                
+                setAllTeamOverviews(temp)
+            })
         })
     }, [])
 
-    useEffect(() => {
-        if (multiQuery.team1 && multiQuery.team2) getTeamOverviewAcrossMatchScouting(multiQuery.team1, (teamOverview1) => {
-            getTeamOverviewAcrossMatchScouting(multiQuery.team2, (teamOverview2) => {
-                setQueriedData({
-                    team1: teamOverview1,
-                    team2: teamOverview2
-                })
-            })
-        })
-    }, [multiQuery])
+    const keyVisibility = {}
+    keyToggleables.forEach(toggleable => {
+        keyVisibility[toggleable.key] = toggleable.show
+    })
+    
+    const toggledSpiderChartData = {}
 
-    console.log({ queriedData })
+    Object.entries(allTeamOverviews).forEach(([ teamName, teamData ]) => {
+        const toggleable = teamToggleables.find(toggleable => toggleable.key == teamName)
+        
+        if (!toggleable || !toggleable.show) return
 
-    const entries = []
-    if(multiQuery.team1 && multiQuery.team2){
-        Object.keys(teamAnalytics1).forEach((key, index) => {
-            entries.push(
-                <div key={index}>
-                    <h2>
-                        {
-                            key
-                        }
-                    </h2>
-                    <hr />
-                    <div>
-                        <div>
-                            {
-                                JSON.stringify(teamAnalytics1[key])
-                            }
-                        </div>
-                        <div className={"vertical-divider"} />
-                        <div>
-                            {
-                                JSON.stringify(teamAnalytics2[key])
-                            }
-                        </div>
-                    </div>
-                </div>
-            )
-        })
-    }
+        toggledSpiderChartData[toggleable.label] = {}
+
+        Object.entries(teamData).filter(([ key ]) => keyVisibility[key]).forEach(([ key, value ]) => toggledSpiderChartData[toggleable.label][key] = value)
+    })
+
+    const axisLabels = {}
+    keyToggleables.forEach(toggleable => {
+        if (toggleable.show) axisLabels[toggleable.key] = toggleable.label
+    })
 
     return (
         <React.Fragment>
-            <div style={{ textAlign: "center", paddingTop: 20 }}>
-                <MultiSegmentDropdownQuery multiQuery={multiQuery} setMultiQuery={setMultiQuery} multiQueryOptions={multiQueryOptions} />
+            <h1>Team Comparison</h1>
+            <hr />
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                <MultiSpiderChart chartWidth={600} chartHeight={400} maxHeight={500} data={toggledSpiderChartData} axisLabels={axisLabels} axisMaximums={axisMaximums} />
+                <div className={"vertical-divider"} style={{ maxHeight: 500 }} />
+                <ToggleablesList style={{ maxHeight: 500 }} toggleables={teamToggleables} setShowAtIndex={setShowTeamAtIndex} setLabelAtIndex={setTeamLabelAtIndex} />
+                <div className={"vertical-divider"} style={{ maxHeight: 500 }} />
+                <ToggleablesList style={{ maxHeight: 500 }} toggleables={keyToggleables} setShowAtIndex={setShowKeyAtIndex} setLabelAtIndex={setKeyLabelAtIndex} />
             </div>
-            <h1>Team Comparison: { multiQuery.team1 || "[N/A]" } vs. { multiQuery.team2 || "[N/A]" }</h1>
-            {
-                multiQuery.team1 && multiQuery.team2 && (
-                    <React.Fragment>
-                        <hr />
-                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                            {
-                                entries
-                            }
-                        </div>
-                    </React.Fragment>
-                )
-            }
         </React.Fragment>
     )
 }
