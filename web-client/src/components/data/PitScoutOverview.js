@@ -4,7 +4,7 @@ import { getMaximums, getMaximumsAcrossPitScouting, getTeamNames, getTeamNamesAc
 import arrayUnique from "array-unique"
 import { calculateTeamAnalytics } from "../../scripts/analytics"
 import ToggleablesList from "../ToggleablesList"
-import MultiSpiderChart from "../MultiSpiderChart"
+import LayeredSpiderChart from "../LayeredSpiderChart"
 import QualitativeData from "../QualitativeData"
 import ScatterPlot from "../ScatterPlot"
 import BoxAndWhisker from "../BoxAndWhisker"
@@ -141,7 +141,7 @@ const PitScoutOverview = ({ state, setState }) => {
                                     <hr />
                                     <h2>Quantitative Overview</h2>
                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                                        <MultiSpiderChart width={600} height={400} data={toggledSpiderChartData} axisMaximums={axisMaximums} />
+                                        <LayeredSpiderChart width={600} height={400} data={toggledSpiderChartData} axisMaximums={axisMaximums} />
                                         <div className={"vertical-divider"} style={{ height: 400 }} />
                                         <ToggleablesList style={{ height: 400 }} toggleables={toggleables} setShowAtIndex={setShowAtIndex} setLabelAtIndex={setLabelAtIndex} />
                                     </div>

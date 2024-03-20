@@ -8,7 +8,7 @@ import TeamPerformance from "../components/data/TeamPerformance"
 import TeamComparison from "../components/data/TeamComparison"
 import MatchOverview from "../components/data/MatchOverview"
 import PitScoutOverview from "../components/data/PitScoutOverview"
-import { getNumericFields, getNumericMatchFields, getNumericPitFields } from "../scripts/api"
+import { getNumericFields, getNumericMatchFields, getNumericPitFields, getTeamNamesAcrossMatchScouting } from "../scripts/api"
 import StatRanking from "../components/data/StatRanking"
 
 const DataPage = () => {
@@ -19,12 +19,14 @@ const DataPage = () => {
     const addButtonRef = useRef()
 
     // list of all keys in the schema that point to a numeric data type, (should be called from server?)
-    const [toggleableMatchKeys, setToggleableMatchKeys] = useState([])
-    const [toggleablePitKeys, setToggleablePitKeys] = useState([])
+    const [numericMatchKeys, setNumericMatchKeys] = useState([])
+    const [numericPitKeys, setNumericPitKeys] = useState([])
+    const [teamNames, setTeamNames] = useState([])
 
     useEffect(() => {
-        getNumericMatchFields(setToggleableMatchKeys)
-        getNumericPitFields(setToggleablePitKeys)
+        getNumericMatchFields(setNumericMatchKeys)
+        getNumericPitFields(setNumericPitKeys)
+        getTeamNamesAcrossMatchScouting(setTeamNames)
 
         const handleClick = (e) => {
             if(addButtonRef.current && !addButtonRef.current.contains(e.target)){
@@ -56,7 +58,7 @@ const DataPage = () => {
         title: "Pit Scout Overview",
         state: {
             query: null,
-            toggleables: toggleablePitKeys.map(key => ({ key, show: true, label: key })),
+            toggleables: numericPitKeys.map(key => ({ key, show: true, label: key })),
             variationKey: null,
             xAxisKey: null,
             yAxisKey: null
@@ -68,7 +70,7 @@ const DataPage = () => {
         title: "Team Overview",
         state: {
             query: null,
-            toggleables: toggleableMatchKeys.map(key => ({ key, show: true, label: key })),
+            toggleables: numericMatchKeys.map(key => ({ key, show: true, label: key })),
             variationKey: null,
             xAxisKey: null,
             yAxisKey: null
@@ -84,7 +86,7 @@ const DataPage = () => {
                 match: null,
                 record: null
             },
-            toggleables: toggleableMatchKeys.map(key => ({ key, show: true, label: key }))
+            toggleables: numericMatchKeys.map(key => ({ key, show: true, label: key }))
         }
     })
 
@@ -92,10 +94,8 @@ const DataPage = () => {
         type: "Team Comparison",
         title: "Team Comparison",
         state: {
-            multiQuery: {
-                team1: null,
-                team2: null
-            }
+            teamToggleables: teamNames.map(key => ({ key, show: true, label: key })),
+            keyToggleables: numericMatchKeys.map(key => ({ key, show: true, label: key }))
         }
     })
 
@@ -189,8 +189,8 @@ const DataPage = () => {
                         <div className={"option"} onClick={addPitScoutOverview}>Pit Scout Overview</div>
                         <div className={"option"} onClick={addTeamOverview}>Team Overview</div>
                         <div className={"option"} onClick={addTeamPerformance}>Team Performance</div>
-                        {/* <div className={"option"} onClick={addTeamComparison}>Team Comparison</div>
-                        <div className={"option"} onClick={addMatchOverview}>Match Overview</div> */}
+                        <div className={"option"} onClick={addTeamComparison}>Team Comparison</div>
+                        {/*  <div className={"option"} onClick={addMatchOverview}>Match Overview</div> */}
                         <div className={"option"} onClick={addStatRanking}>Stat Ranking</div>
                     </div>
                 )

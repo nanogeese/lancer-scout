@@ -27,6 +27,7 @@ const TournamentPage = () => {
     const handleSelectExistingTournament = () => {
         if(confirm(`All entries submitted from now on will be listed under the tournament "${selectedExistingTournament}". Are you sure you want to continue?`)){
             localStorage.setItem("tournamentName", selectedExistingTournament)
+            localStorage.setItem("tab-state", "[]")
 
             setCurrentTournamentName(selectedExistingTournament)
         }
