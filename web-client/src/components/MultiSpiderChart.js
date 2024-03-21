@@ -88,7 +88,7 @@ const MultiSpiderChart = ({ chartWidth, chartHeight, maxHeight, style, data, axi
         <div style={{ display: "flex", flexDirection: "column", width: chartWidth, height: maxHeight }}>
             <svg width={chartWidth} height={chartHeight} style={{ ...style, flexShrink: 0 }} viewBox={"0 0 36 30"}>
                 {
-                    [...axisRenders, ...dataRenders, ...labelRenders]
+                    [...dataRenders, ...labelRenders]
                 }
             </svg>
             <div style={{ overflowY: "scroll" }}>
