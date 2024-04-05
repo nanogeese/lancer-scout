@@ -116,7 +116,7 @@
 
         },
 
-        "dataType": "6bit"
+        "dataType": "8bit"
 
     },
 
@@ -244,7 +244,7 @@
             "type": "numnber"
 
         },
-        
+
         "dataType": "6bit"
     },
 
