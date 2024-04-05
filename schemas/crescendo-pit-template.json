@@ -74,7 +74,7 @@
             
             ]
         },
-        "dataType": "6bit"
+        "dataType": "16bit"
     },
     {
         "title": "Drivetrain Style",
