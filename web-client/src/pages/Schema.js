@@ -17,17 +17,27 @@ const generateEmptyMatchSchema = () => {
             }
         },
         {
+            id: "required-matchNumber",
+            title: "Match Number",
+            ui: {
+                type: "number"
+            },
+            dataType: "8bit"
+        },
+        {
             id: "optional-scoutName",
             title: "Scout Name",
             ui: {
-                type: "text"
+                type: "text",
+                maxLength: 50
             }
         },
         {
             id: "required-teamName",
             title: "Team Name",
             ui: {
-                type: "dropdown"
+                type: "dropdown",
+                options: []
             }
         },
         {
@@ -70,14 +80,16 @@ const generateEmptyPitSchema = () => {
             id: "optional-scoutName",
             title: "Scout Name",
             ui: {
-                type: "text"
+                type: "text",
+                maxLength: 50
             }
         },
         {
             id: "required-teamName",
             title: "Team Name",
             ui: {
-                type: "dropdown"
+                type: "dropdown",
+                options: []
             }
         }
     ]
@@ -117,11 +129,15 @@ const SchemaPage = () => {
     const exportMatchJSON = () => {
         const formatted = [...workingMatchSchema]
 
+        console.log({ formatted })
+
         formatted.forEach(entry => {
             if (entry.ui.type == "text") entry.dataType = "string"
             else if(entry.ui.type == "slider") entry.dataType = "4bit"
             else if(entry.ui.type == "toggle") entry.dataType = "1bit"
             else if(entry.ui.type == "radio" || entry.ui.type == "dropdown") {
+                console.log(entry)
+
                 entry.ui.options = entry.ui.options.map(option => option.trim())
 
                 let expectedDataType = "1bit"
@@ -135,6 +151,8 @@ const SchemaPage = () => {
                 entry.dataType = expectedDataType
             }
         })
+
+        console.log({ formatted })
         
         const validationResult = validateSchema(formatted, "Match")
 
@@ -185,6 +203,8 @@ const SchemaPage = () => {
             alert(validationResult.reason)
         }
     }
+
+    // TODO: make sure required fields are there
 
     const importMatchJSON = () => {
         const importedSchemaString = prompt("Paste an the JSON (not url) for an existing match schema created with the Lancer Scout schema builder.")

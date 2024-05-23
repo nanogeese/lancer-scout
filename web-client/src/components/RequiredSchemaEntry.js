@@ -70,7 +70,7 @@ const RequiredSchemaEntry = ({ index, workingSchema, setWorkingSchema }) => {
                                 ) : workingSchema[index].ui.type == "text" ? (
                                     <div className={"attribute"}>
                                         <label>Max Length:</label>
-                                        <input type={"number"} value={workingSchema[index].ui.maxLength || 50} onChange={(e) => setAttribute("maxLength", Number(e.nativeEvent.target.value))} />
+                                        <input type={"number"} value={workingSchema[index].ui.maxLength} onChange={(e) => setAttribute("maxLength", Number(e.nativeEvent.target.value))} />
                                     </div>
                                 ) : (workingSchema[index].ui.type == "number" || workingSchema[index].ui.type == "timer") && (
                                     <div className={"attribute"}>

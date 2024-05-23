@@ -71,10 +71,9 @@
                 "9015 - Questionable Engineering",
                 "9027 - PATH to Domination",
                 "9094 - The Earthquakers"
-            
             ]
         },
-        "dataType": "8bit"
+        "dataType": "6bit"
     },
     {
         "title": "Drivetrain Style",
