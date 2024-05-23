@@ -1,0 +1,20 @@
+[
+    {
+        "id": "optional-scoutName",
+        "title": "Scout Name",
+        "ui": {
+            "type": "text",
+            "maxLength": 50
+        },
+        "dataType": "string"
+    },
+    {
+        "id": "required-teamName",
+        "title": "Team Name",
+        "ui": {
+            "type": "dropdown",
+            "options": []
+        },
+        "dataType": "1bit"
+    }
+]
