@@ -59,11 +59,13 @@ const uploadMatchScout = (formId, formJson, callback) => {
 }
 
 const uploadPitScout = (formId, formJson, callback) => {
+    const tournamentName = localStorage.getItem("tournamentName") ?? ""
     const teamName = formJson["Team Name"]
     const clientFormId = formId
     const jsonValues = formJson
 
     const body = {
+        tournamentName,
         teamName,
         clientFormId,
         jsonValues

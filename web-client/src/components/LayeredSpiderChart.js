@@ -20,6 +20,20 @@ const LayeredSpiderChart = ({ width, height, style, data, axisMaximums }) => {
         )
     }
 
+    const quarterMarkerRenders = []
+    for(let i = 1;i<4;i++){
+        const radius = 9 * (i / 4)
+
+        for(let j = 0;j<data.length;j++){
+            const startPoint = polarToCartesian(2 * Math.PI * (j / data.length), radius)
+            const endPoint = polarToCartesian(2 * Math.PI * ((j + 1) / data.length), radius)
+
+            quarterMarkerRenders.push(
+                <line key={"quarterMark" + (i * data.length + j)} stroke={"rgb(20, 20, 20)"} strokeWidth={0.05} x1={startPoint.x} y1={startPoint.y} x2={endPoint.x} y2={endPoint.y} />
+            )
+        }
+    }
+
     const bestIndicatorPoints = data.map((point, index) => polarToCartesian(2 * Math.PI * (index / data.length), 9 * (Math.min(point.best / axisMaximums[point.key], 1) || 0.001)))
 
     const bestIndicatorRenders = []
@@ -81,14 +95,11 @@ const LayeredSpiderChart = ({ width, height, style, data, axisMaximums }) => {
 
     return (
         <svg width={width} height={height} style={style} viewBox={"0 0 36 30"}>
-            {
-                [...axisRenders, ...bestIndicatorRenders, ...averageIndicatorRenders, ...worstIndicatorRenders]
-            }
             <path fill={"rgb(102, 227, 156)"} stroke={"rgb(63, 158, 104)"} strokeWidth={0.1} d={bestIndicatorConnectionsPath} />
             <path fill={"rgb(255, 203, 130)"} stroke={"rgb(201, 131, 34)"} strokeWidth={0.1} d={averageIndicatorConnectionsPath} />
             <path fill={"rgb(250, 180, 180)"} stroke={"rgb(173, 65, 57)"} strokeWidth={0.1} d={worstIndicatorConnectionsPath} />
             {
-                labelRenders
+                [...axisRenders, ...quarterMarkerRenders, ...bestIndicatorRenders, ...averageIndicatorRenders, ...worstIndicatorRenders, ...labelRenders]
             }
         </svg>
     )

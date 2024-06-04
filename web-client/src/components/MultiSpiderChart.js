@@ -5,7 +5,7 @@ const MultiSpiderChart = ({ chartWidth, chartHeight, maxHeight, style, data, axi
     const teamNames = Object.keys(data)
 
     if (Object.keys(axisLabels).length == 0) return (
-        <div style={{ ...style, width, height }} />
+        <div style={{ ...style, chartWidth, chartHeight }} />
     )
     
     const teamColors = {}
@@ -88,7 +88,7 @@ const MultiSpiderChart = ({ chartWidth, chartHeight, maxHeight, style, data, axi
         <div style={{ display: "flex", flexDirection: "column", width: chartWidth, height: maxHeight }}>
             <svg width={chartWidth} height={chartHeight} style={{ ...style, flexShrink: 0 }} viewBox={"0 0 36 30"}>
                 {
-                    [...axisRenders, ...dataRenders, ...labelRenders]
+                    [...dataRenders, ...labelRenders]
                 }
             </svg>
             <div style={{ overflowY: "scroll" }}>

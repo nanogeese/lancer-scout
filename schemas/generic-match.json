@@ -1,0 +1,70 @@
+[
+    {
+        "id": "optional-pregameHeader",
+        "title": "Pregame",
+        "ui": {
+            "type": "header"
+        }
+    },
+    {
+        "id": "required-matchNumber",
+        "title": "Match Number",
+        "ui": {
+            "type": "number"
+        },
+        "dataType": "8bit"
+    },
+    {
+        "id": "optional-scoutName",
+        "title": "Scout Name",
+        "ui": {
+            "type": "text",
+            "maxLength": 50
+        },
+        "dataType": "string"
+    },
+    {
+        "id": "required-teamName",
+        "title": "Team Name",
+        "ui": {
+            "type": "dropdown",
+            "options": []
+        },
+        "dataType": "1bit"
+    },
+    {
+        "id": "required-allianceColor",
+        "title": "Alliance Color",
+        "ui": {
+            "type": "radio",
+            "options": [
+                "Red",
+                "Blue"
+            ]
+        },
+        "dataType": "1bit"
+    },
+    {
+        "id": "optional-postgameHeader",
+        "title": "Postgame",
+        "ui": {
+            "type": "header"
+        }
+    },
+    {
+        "id": "required-allianceScore",
+        "title": "Alliance Score",
+        "ui": {
+            "type": "number"
+        },
+        "dataType": "8bit"
+    },
+    {
+        "id": "required-opponentScore",
+        "title": "Opponent Score",
+        "ui": {
+            "type": "number"
+        },
+        "dataType": "8bit"
+    }
+]
