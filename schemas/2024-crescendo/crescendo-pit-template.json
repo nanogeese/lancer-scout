@@ -1,0 +1,188 @@
+[
+    {
+        "id": "optional-scoutName",
+        "title": "Scout Name",
+        "ui": {
+            "type": "text",
+            "maxLength": 20
+        },
+        "dataType": "string"
+    },
+    {
+        "id": "required-teamName",
+        "title": "Team Name",
+        "ui": {
+            "type": "dropdown",
+            "options": [
+                "33 - Killer Bees",
+                "45 - TechnoKats",
+                "111 - WildStang",
+                "118 - Robonauts",
+                "125 - NUTRONs",
+                "180 - S.P.A.M.",
+                "195 - CyberKnights",
+                "226 - Hammerheads",
+                "234 - Cyber Blue",
+                "302 - Lake Orion Dragons",
+                "321 - RoboLancers",
+                "341 - Miss Daisy",
+                "694 - StuyPulse",
+                "829 - The Digital Goats",
+                "868 - TechHOUNDS",
+                "910 - The Foley Freeze",
+                "930 - Mukwonago BEARs",
+                "1023 - Bedford Express",
+                "1024 - Kil-A-Bytes",
+                "1261 - Robo Lions",
+                "1477 - Texas Torque",
+                "1706 - Ratchet Rockers",
+                "1714 - MORE Robotics ",
+                "1732 - Hilltopper Robotics",
+                "1741 - Red Alert Robotics",
+                "1747 - Harrison Boiler Robotics",
+                "1807 - Redbird Robotics",
+                "1923 - The MidKnight Inventors",
+                "1987 - The Broncobots",
+                "2056 - OP Robotics",
+                "2075 - Enigma Robotics",
+                "2468 - Team Appreciate",
+                "2481 - Roboteers ",
+                "2539 - Krypton Cougars",
+                "2767 - Stryke Force",
+                "2910 - Jack in the Bot",
+                "3061 - Huskie Robotics",
+                "3173 - IgKnighters",
+                "3276 - TOOLCATS",
+                "3357 - COMETS",
+                "3414 - Hackbots",
+                "3478 - LamBot",
+                "3538 - RoboJackets",
+                "3940 - CyberTooth",
+                "4028 - Beak Squad",
+                "4143 - MARS/WARS",
+                "4206 - Robo Vikes",
+                "4265 - Secret City Wildbots",
+                "4270 - Crusaders",
+                "4499 - The Highlanders",
+                "4607 - Becker Robotics",
+                "4611 - OZone",
+                "4635 - PrepaTec Botbusters",
+                "4828 - RoboEagles",
+                "4967 - That ONE Team-Our Next Engineers",
+                "5010 - Tiger Dynasty",
+                "5712 - Hemlock’s Gray Matter",
+                "5804 - Torch",
+                "5907 - CC Shambots",
+                "6081 - Digital Dislocators ",
+                "6517 - So-Kno Robo",
+                "7028 - Binary Battalion",
+                "7457 - suPURDUEper Robotics",
+                "8044 - Denham Venom",
+                "9312 - NERD Spark",
+                "9401 - Midas’ Mayhem"
+            ]
+        },
+        "dataType": "8bit"
+    },
+    {
+        "id": "optional-drivetrainStyle",
+        "title": "Drivetrain Style",
+        "ui": {
+            "type": "radio",
+            "options": ["Differential / Tank", "Swerve", "Mecanum"]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "id": "optional-intakeStyle",
+        "title": "Intake Style",
+        "ui": {
+            "type": "radio",
+            "options": ["Over The Bumper", "Under The Bumper", "Other"]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "id": "optional-intakePositions",
+        "title": "Intake Positions",
+        "ui": {
+            "type": "radio",
+            "options": ["N/A", "Ground Only", "Source Only", "Ground And Source"]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "id": "optional-hasNoteHandoff",
+        "title": "Has Note Handoff",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-canScoreAmp",
+        "title": "Can Score Amp",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-speakerScoringPositions",
+        "title": "Speaker Scoring Positions",
+        "ui": {
+            "type": "dropdown",
+            "options": ["None", "Center Only", "Sides Only", "Center and Sides", "Anywhere", "Other"]
+        },
+        "dataType": "4bit"
+    },
+    {
+        "id": "optional-canHang",
+        "title": "Can Hang",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-canScoreTrap",
+        "title": "Can Score Trap",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-hasAutoDSSide",
+        "title": "Has Auto For DS Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-hasAutoCenterSide",
+        "title": "Has Auto For Center Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-hasAutoSourceSide",
+        "title": "Has Auto For Source Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-comments",
+        "title": "Comments",
+        "ui": {
+            "type": "text",
+            "maxLength": 150
+        },
+        "dataType": "string"
+    }
+]
