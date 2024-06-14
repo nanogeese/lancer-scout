@@ -1,0 +1,400 @@
+[
+    {
+        "id": "optional-pregameHeader",
+        "title": "Pregame",
+
+        "ui": {
+            "type": "header"
+        }
+    },
+
+    {
+        "id": "required-matchNumber",
+        "title": "Match Number",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "8bit"
+    },
+
+    {
+        "id": "optional-scoutName",
+        "title": "Scout Name",
+
+        "ui": {
+            "type": "text",
+
+            "maxLength": 20
+        },
+
+        "dataType": "string"
+    },
+
+    {
+        "id": "required-teamName",
+        "title": "Team Name",
+
+        "ui": {
+            "type": "dropdown",
+
+            "options": [
+                "33",
+                "45",
+                "111",
+                "118",
+                "125",
+                "180",
+                "195",
+                "226",
+                "234",
+                "302",
+                "321",
+                "341",
+                "694",
+                "829",
+                "868",
+                "910",
+                "930",
+                "1023",
+                "1024",
+                "1261",
+                "1477",
+                "1706",
+                "1714",
+                "1732",
+                "1741",
+                "1747",
+                "1807",
+                "1923",
+                "1987",
+                "2056",
+                "2075",
+                "2468",
+                "2481",
+                "2539",
+                "2767",
+                "2910",
+                "3061",
+                "3173",
+                "3276",
+                "3357",
+                "3414",
+                "3478",
+                "3538",
+                "3940",
+                "4028",
+                "4143",
+                "4206",
+                "4265",
+                "4270",
+                "4499",
+                "4607",
+                "4611",
+                "4635",
+                "4828",
+                "4967",
+                "5010",
+                "5712",
+                "5804",
+                "5907",
+                "6081",
+                "6517",
+                "7028",
+                "7457",
+                "8044",
+                "9312",
+                "9401"
+            ]
+        },
+
+        "dataType": "8bit"
+    },
+
+    {
+        "id": "required-allianceColor",
+        "title": "Alliance Color",
+
+        "ui": {
+            "type": "radio",
+
+            "options": ["Red", "Blue"]
+        },
+
+        "dataType": "1bit"
+    },
+
+    {
+        "id": "optional-startLane",
+        "title": "Start Lane",
+
+        "ui": {
+            "type": "radio",
+
+            "options": ["Source", "Source Subwoofer", "Center Subwoofer", "Amp Subwoofer", "Amp"]
+        },
+
+        "dataType": "4bit"
+    },
+
+    {
+        "id": "optional-autoHeader",
+        "title": "Auto",
+
+        "ui": {
+            "type": "header"
+        }
+    },
+
+    {
+        "id": "optional-taxied",
+        "title": "Taxied",
+
+        "ui": {
+            "type": "toggle"
+        },
+
+        "dataType": "boolean"
+    },
+
+    {
+        "id": "optional-autoSpeakerScored",
+        "title": "Auto Speaker Notes Scored",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "4bit"
+    },
+
+    {
+        "id": "optional-autoSpeakerMissed",
+        "title": "Auto Speaker Notes Missed",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "4bit"
+    },
+
+    {
+        "id": "optional-teleopHeader",
+        "title": "Teleop",
+
+        "ui": {
+            "type": "header"
+        }
+    },
+
+    {
+        "id": "optional-notesFed",
+        "title": "Notes fed",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "6bit"
+    },
+
+    {
+        "id": "optional-teleopSpeakerScored",
+        "title": "Teleop Speaker Notes Scored",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "6bit"
+    },
+
+    {
+        "id": "optional-teleopSpeakerMissed",
+        "title": "Teleop Speaker Notes Missed",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "6bit"
+    },
+
+    {
+        "id": "optional-teleopAmpScored",
+        "title": "Teleop Amp Notes Scored",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "6bit"
+    },
+
+    {
+        "id": "optional-teleopAmpMissed",
+        "title": "Teleop Amp Notes Missed",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "6bit"
+    },
+
+    {
+        "id": "optional-speakerScoringPosition",
+        "title": "Speaker Scoring Positions",
+
+        "ui": {
+            "type": "dropdown",
+
+            "options": ["None", "Center Only", "Sides Only", "Center and Sides", "Anywhere", "Other"]
+        },
+
+        "dataType": "4bit"
+    },
+
+    {
+        "id": "optional-endgameHeader",
+        "title": "Endgame",
+
+        "ui": {
+            "type": "header"
+        }
+    },
+
+    {
+        "id": "optional-hangSuccessful",
+        "title": "Hang Successful",
+
+        "ui": {
+            "type": "toggle"
+        },
+
+        "dataType": "boolean"
+    },
+
+    {
+        "id": "optional-achievedHarmony",
+        "title": "Achieved Harmony",
+
+        "ui": {
+            "type": "toggle"
+        },
+
+        "dataType": "boolean"
+    },
+
+    {
+        "id": "optional-humanPlayerShotMade",
+        "title": "Human Player Shot Made",
+
+        "ui": {
+            "type": "toggle"
+        },
+
+        "dataType": "boolean"
+    },
+
+    {
+        "id": "optional-postgameHeader",
+        "title": "Postgame",
+
+        "ui": {
+            "type": "header"
+        }
+    },
+
+    {
+        "id": "optional-wonMatch",
+        "title": "Won Match",
+
+        "ui": {
+            "type": "toggle"
+        },
+
+        "dataType": "boolean"
+    },
+
+    {
+        "id": "optional-rpEarned",
+        "title": "Ranking Points Earned",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "4bit"
+    },
+
+    {
+        "id": "required-allianceScore",
+        "title": "Alliance Score",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "8bit"
+    },
+
+    {
+        "id": "required-opponentScore",
+        "title": "Opponent Score",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "8bit"
+    },
+
+    {
+        "id": "optional-penaltiesByAlliance",
+        "title": "Penalties Points By Alliance",
+
+        "ui": {
+            "type": "number"
+        },
+
+        "dataType": "6bit"
+    },
+
+    {
+        "id": "optional-brokeDown",
+        "title": "Broke Down",
+
+        "ui": {
+            "type": "toggle"
+        },
+
+        "dataType": "boolean"
+    },
+
+    {
+        "id": "optional-tipped",
+        "title": "Tipped",
+
+        "ui": {
+            "type": "toggle"
+        },
+
+        "dataType": "boolean"
+    },
+
+    {
+        "id": "optional-comments",
+        "title": "Comments",
+
+        "ui": {
+            "type": "text",
+
+            "maxLength": 100
+        },
+
+        "dataType": "string"
+    }
+]
