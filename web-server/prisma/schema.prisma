@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:admin@localhost:5432/mydb?schema=sample"
+  url      = "postgresql://postgres:admin@db:5432/mydb?schema=sample"
 }
 
 model Tournament {
