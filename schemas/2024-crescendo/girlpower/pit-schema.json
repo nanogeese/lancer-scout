@@ -1,0 +1,140 @@
+[
+    {
+        "id": "optional-scoutName",
+        "title": "Scout Name",
+        "ui": {
+            "type": "text",
+            "maxLength": 20
+        },
+        "dataType": "string"
+    },
+    {
+        "id": "required-teamName",
+        "title": "Team Name",
+        "ui": {
+            "type": "dropdown",
+            "options": [
+                "11 - MORT",
+                "272 - Cyber Crusaders",
+                "321 - RoboLancers",
+                "341 - Miss Daisy",
+                "365 - MOE (Miracle Workerz)",
+                "427 - LANCE-A-LOT",
+                "433 - Firebirds",
+                "708 - Hatters Robotics",
+                "714 - Panthera",
+                "1391 - Metal Moose",
+                "2495 - Hivemind",
+                "2539 - Krypton Cougars",
+                "6897 - Astraea Robotics",
+                "6921 - Technados",
+                "8630 - CAPS ROBOTICS", 
+                "9015 - Questionable Engineering",
+                "9992 Technados 2",
+                "9998 - Krypton Cougars 2nd Robot"
+            ]
+        },
+        "dataType": "8bit"
+    },
+    {
+        "id": "optional-drivetrainStyle",
+        "title": "Drivetrain Style",
+        "ui": {
+            "type": "radio",
+            "options": ["Differential / Tank", "Swerve", "Mecanum"]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "id": "optional-intakeStyle",
+        "title": "Intake Style",
+        "ui": {
+            "type": "radio",
+            "options": ["Over The Bumper", "Under The Bumper", "Other"]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "id": "optional-intakePositions",
+        "title": "Intake Positions",
+        "ui": {
+            "type": "radio",
+            "options": ["N/A", "Ground Only", "Source Only", "Ground And Source"]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "id": "optional-hasNoteHandoff",
+        "title": "Has Note Handoff",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-canScoreAmp",
+        "title": "Can Score Amp",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-speakerScoringPositions",
+        "title": "Speaker Scoring Positions",
+        "ui": {
+            "type": "dropdown",
+            "options": ["None", "Center Only", "Sides Only", "Center and Sides", "Anywhere", "Other"]
+        },
+        "dataType": "4bit"
+    },
+    {
+        "id": "optional-canHang",
+        "title": "Can Hang",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-canScoreTrap",
+        "title": "Can Score Trap",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-hasAutoDSSide",
+        "title": "Has Auto For DS Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-hasAutoCenterSide",
+        "title": "Has Auto For Center Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-hasAutoSourceSide",
+        "title": "Has Auto For Source Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-comments",
+        "title": "Comments",
+        "ui": {
+            "type": "text",
+            "maxLength": 150
+        },
+        "dataType": "string"
+    }
+]
