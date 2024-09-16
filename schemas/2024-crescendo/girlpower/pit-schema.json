@@ -34,7 +34,7 @@
                 "9998 - Krypton Cougars 2nd Robot"
             ]
         },
-        "dataType": "8bit"
+        "dataType": "6bit"
     },
     {
         "id": "optional-drivetrainStyle",
