@@ -1,0 +1,155 @@
+[
+    {
+        "id": "optional-scoutName",
+        "title": "Scout Name",
+        "ui": {
+            "type": "text",
+            "maxLength": 20
+        },
+        "dataType": "string"
+    },
+    {
+        "id": "required-teamName",
+        "title": "Team Name",
+        "ui": {
+            "type": "dropdown",
+            "options": [
+                "11",
+                "103",
+                "192",
+                "293",
+                "321",
+                "341",
+                "341B",
+                "365",
+                "423",
+                "427",
+                "433",
+                "484",
+                "708",
+                "1640",
+                "1168",
+                "1218",
+                "1391",
+                "2016",
+                "2539",
+                "2590",
+                "2559",
+                "2607",
+                "2720",
+                "2722",
+                "3314",
+                "5401",
+                "5181",
+                "5684",
+                "6808",
+                "7414",
+                "8714",
+                "9094",
+                "9416"
+            ]
+        },
+        "dataType": "6bit"
+    },
+    {
+        "id": "optional-drivetrainStyle",
+        "title": "Drivetrain Style",
+        "ui": {
+            "type": "radio",
+            "options": ["Differential / Tank", "Swerve", "Mecanum"]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "id": "optional-intakeStyle",
+        "title": "Intake Style",
+        "ui": {
+            "type": "radio",
+            "options": ["Over The Bumper", "Under The Bumper", "Other"]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "id": "optional-intakePositions",
+        "title": "Intake Positions",
+        "ui": {
+            "type": "radio",
+            "options": ["N/A", "Ground Only", "Source Only", "Ground And Source"]
+        },
+        "dataType": "2bit"
+    },
+    {
+        "id": "optional-hasNoteHandoff",
+        "title": "Has Note Handoff",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-canScoreAmp",
+        "title": "Can Score Amp",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-speakerScoringPositions",
+        "title": "Speaker Scoring Positions",
+        "ui": {
+            "type": "dropdown",
+            "options": ["None", "Center Only", "Sides Only", "Center and Sides", "Anywhere", "Other"]
+        },
+        "dataType": "4bit"
+    },
+    {
+        "id": "optional-canHang",
+        "title": "Can Hang",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-canScoreTrap",
+        "title": "Can Score Trap",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-hasAutoDSSide",
+        "title": "Has Auto For DS Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-hasAutoCenterSide",
+        "title": "Has Auto For Center Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-hasAutoSourceSide",
+        "title": "Has Auto For Source Side",
+        "ui": {
+            "type": "toggle"
+        },
+        "dataType": "boolean"
+    },
+    {
+        "id": "optional-comments",
+        "title": "Comments",
+        "ui": {
+            "type": "text",
+            "maxLength": 150
+        },
+        "dataType": "string"
+    }
+]
